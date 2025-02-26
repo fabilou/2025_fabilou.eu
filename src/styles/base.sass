@@ -1,0 +1,108 @@
+@use "./global"
+
+:root
+    --color-black: #{global.$color-black}
+    --color-grey-20: #{global.$color-grey-20}
+    --color-grey-50: #{global.$color-grey-50}
+    --color-grey-80: #{global.$color-grey-80}
+    --color-orange: #{global.$color-orange}
+    --color-off-white: #{global.$color-off-white}
+    --color-off-white-20: #{global.$color-off-white-20}
+    --color-off-white-50: #{global.$color-off-white-50}
+    --color-off-white-80: #{global.$color-off-white-80}
+    --color-white: #{global.$color-white}
+
+    --font-size-xxs: #{global.$font-size-xxs}
+    --font-size-xs: #{global.$font-size-xs}
+    --font-size-s: #{global.$font-size-s}
+    --font-size-m: #{global.$font-size-m}
+
+    --font-primary-xxs: 400 var(--font-size-xxs)/110% #{global.$typeface-primary}
+    --font-primary-xs: 400 var(--font-size-xs)/110% #{global.$typeface-primary}
+    --font-primary-s: 400 var(--font-size-s)/110% #{global.$typeface-primary}
+    --font-primary-m: 400 var(--font-size-m)/110% #{global.$typeface-primary}
+
+    --font-secondary-xxs: 300 var(--font-size-xxs)/110% #{global.$typeface-secondary}
+    --font-secondary-xs: 300 var(--font-size-xs)/110% #{global.$typeface-secondary}
+    --font-secondary-s: 300 var(--font-size-s)/110% #{global.$typeface-secondary}
+
+    --spacing-fixed-xs: #{global.$spacing-fixed-xs}
+    --spacing-fixed-s: #{global.$spacing-fixed-s}
+    --spacing-fixed-m: #{global.$spacing-fixed-m}
+    --spacing-fixed-l: #{global.$spacing-fixed-l}
+    --spacing-fixed-xl: #{global.$spacing-fixed-xl}
+
+    --spacing-xs: #{global.$spacing-xs}
+    --spacing-s: #{global.$spacing-s}
+    --spacing-m: #{global.$spacing-m}
+    --spacing-l: #{global.$spacing-l}
+    --spacing-xl: #{global.$spacing-xl}
+
+    --radius-s: #{global.$radius-s}
+
+    --shadow-xs: #{global.$shadow-xs}
+    --shadow-s: #{global.$shadow-s}
+    --shadow-m: #{global.$shadow-m}
+
+    --transition-s: #{global.$transition-s}
+
+    @media screen and ( max-width: global.$breakpoint-s )
+        --font-size-xxs: #{global.$font-size-xxs}
+        --font-size-xs: #{global.$font-size-xxs}
+        --font-size-s: #{global.$font-size-xs}
+        --font-size-m: #{global.$font-size-s}
+
+        --spacing-fixed-xs: #{global.$spacing-fixed-xs}
+        --spacing-fixed-s: #{global.$spacing-fixed-xs}
+        --spacing-fixed-m: #{global.$spacing-fixed-s}
+        --spacing-fixed-l: #{global.$spacing-fixed-m}
+        --spacing-fixed-xl: #{global.$spacing-fixed-l}
+
+        --spacing-xs: #{global.$spacing-xs}
+        --spacing-s: #{global.$spacing-xs}
+        --spacing-m: #{global.$spacing-s}
+        --spacing-l: #{global.$spacing-m}
+        --spacing-xl: #{global.$spacing-l}
+
+    // @media (prefers-color-scheme: dark)
+    //     --color-black: #{global.$color-white}
+    //     --color-grey-20: #{global.$color-off-white-20}
+    //     --color-grey-50: #{global.$color-off-white-50}
+    //     --color-grey-80: #{global.$color-off-white-80}
+    //     --color-orange: #{global.$color-orange}
+    //     --color-off-white: #{global.$color-grey}
+    //     --color-off-white-20: #{global.$color-grey-20}
+    //     --color-off-white-50: #{global.$color-grey-50}
+    //     --color-off-white-80: #{global.$color-grey-80}
+    //     --color-white: #{global.$color-black}
+
+html
+    scroll-behavior: auto
+
+body
+    font: var(--font-primary-s)
+    color: var(--color-black)
+    background-color: var(--color-white)
+
+section
+    margin-block-end: 2em
+
+h1, h2, h3
+    font: var(--font-primary-xs)
+    margin-block-end: 0.5em
+
+p
+    max-width: 60ch
+
+    & > a
+        color: inherit
+        font: var(--font-secondary-s)
+        text-decoration: inherit
+        text-shadow: var(--shadow-s)
+
+        &:hover, &:focus-visible
+            text-shadow: var(--shadow-m)
+
+a
+    color: inherit
+    text-decoration: inherit

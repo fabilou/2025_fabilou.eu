@@ -1,0 +1,32 @@
+@use "../styles/global"
+
+.header
+    inset: var(--spacing-m) var(--spacing-l) auto
+    position: absolute
+    z-index: 999
+
+.nav-list
+    list-style: none
+    display: grid
+    grid-template: 2fr
+    grid-auto-flow: column
+
+    & > li
+        grid-column: 1
+
+        &.right
+            grid-column: 2
+            justify-self: end
+
+    & a
+        color: inherit
+        font: var(--font-secondary-s)
+        text-decoration: inherit
+        text-shadow: var(--shadow-s)
+        position: relative
+
+        @media screen and ( max-width: var(--breakpoint-s) )
+            font: var(--font-secondary-xs)
+
+        &:hover, &:focus-visible
+            text-shadow: var(--shadow-m)

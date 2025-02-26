@@ -1,0 +1,77 @@
+@use "../styles/global"
+
+.container
+    animation: fade-in-popup ease var(--transition-s) forwards
+    // backdrop-filter: blur(128px)
+    background: var(--color-off-white)
+    // background: var(--color-off-white-50)
+    border-radius: var(--radius-s)
+    border: none
+    inset: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) auto
+    isolation: isolate
+    min-height: calc( 100% - 2 * var(--spacing-xs ))
+    overflow-y: auto
+    padding: var(--spacing-xl) var(--spacing-l) var(--spacing-m)
+    position: fixed
+    transition: transform var(--transition-s)
+    width: min(60ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
+    z-index: 9999
+
+    &.close
+        animation: fade-out-popup ease var(--transition-s) forwards
+
+        & + .overlay
+            animation: fade-out-overlay ease var(--transition-s) forwards
+
+    &::after
+        content: ""
+        inset: 0
+        position: fixed
+        z-index: -1
+
+.overlay
+    animation: fade-in-overlay ease var(--transition-s) forwards
+    cursor: pointer
+    inset: 0
+    position: fixed
+    transition: opacity var(--transition-s)
+    z-index: 99
+
+.button
+    font: var(--font-secondary-s)
+    inset: var(--spacing-m) var(--spacing-l) auto auto
+    position: fixed
+    text-shadow: var(--shadow-s)
+    z-index: 10
+
+    &:hover, &:focus-visible
+        text-shadow: var(--shadow-m)
+
+@keyframes fade-in-overlay
+    0%
+        opacity: 0
+        backdrop-filter: blur(0)
+    100%
+        opacity: 1
+        backdrop-filter: blur(2px)
+
+@keyframes fade-out-overlay
+    0%
+        opacity: 1
+        backdrop-filter: blur(2px)
+    100%
+        opacity: 0
+        backdrop-filter: blur(0)
+
+@keyframes fade-in-popup
+    0%
+        translate: 100% 0
+    100%
+        translate: 0
+
+@keyframes fade-out-popup
+    0%
+        translate: 0
+
+    100%
+        translate: 100% 0

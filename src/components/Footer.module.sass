@@ -1,0 +1,19 @@
+@use "../styles/global"
+
+.container
+    color: var(--color-black)
+    inset: auto auto var(--spacing-xs) var(--spacing-l)
+    position: fixed
+    z-index: 999
+
+.list
+    display: flex
+    justify-content: flex-start
+    gap: var(--spacing-s)
+
+.link
+    font: var(--font-secondary-xxs)
+    text-shadow: var(--shadow-s)
+
+    &:hover, &:focus-visible
+        text-shadow: var(--shadow-m)
