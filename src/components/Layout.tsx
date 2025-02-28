@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { useGlobalContext } from "./GlobalContext"
 import Header from "./Header"
 import Projects from "./Projects"
 import Footer from "./Footer"
@@ -14,11 +15,15 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+	const { projectURL } = useGlobalContext()
+
+	const filter = projectURL?.replace(/^\/|\/$/g, "")
+
 	return (
 		<main className={styles.content}>
 			<Header />
-			<Projects />
 			{children}
+			<Projects filter={filter} />
 			<Footer />
 		</main>
 	)
