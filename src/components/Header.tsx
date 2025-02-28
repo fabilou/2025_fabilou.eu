@@ -1,18 +1,27 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
+import { useGlobalContext } from "./GlobalContext"
+import EmailButton from "./EmailButton"
+
 import * as styles from "./Header.module.sass"
 
 const Header: React.FC = () => {
+	const { projectURL } = useGlobalContext()
+
+	const [copied, setCopied] = React.useState(false)
+
 	return (
 		<header className={styles.header}>
 			<nav>
 				<ul className={styles.navList}>
 					<li>
-						<Link to="/">Fabi Lou Viktoria Sax</Link>
+						<Link to="/">
+							<h1>Fabi Lou Viktoria Sax</h1>
+						</Link>
 					</li>
 					<li>
-						<a href="mailto:hello@fabilou.eu">hello@fabilou.eu</a>
+						<EmailButton className={styles.email} text="hello@fabilou.eu" />
 					</li>
 					<li>
 						<a href="https://instagram.com/fabilousax">Instagram</a>
@@ -20,6 +29,13 @@ const Header: React.FC = () => {
 					<li>
 						<a href="https://github.com/fabilou">Github</a>
 					</li>
+					{projectURL ? (
+						<li className={styles.back}>
+							<Link to="/">Back</Link>
+						</li>
+					) : (
+						<></>
+					)}
 					<li className={styles.right}>
 						<Link to="/about">About</Link>
 					</li>

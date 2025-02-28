@@ -1,18 +1,18 @@
 @use "../styles/global"
 
 .header
-    inset: var(--spacing-m) var(--spacing-l) auto
+    inset: var(--spacing-m) var(--spacing-m) auto
     position: absolute
-    z-index: 999
 
 .nav-list
     list-style: none
     display: grid
-    grid-template: 2fr
+    grid-auto-rows: 1fr
     grid-auto-flow: column
 
     & > li
         grid-column: 1
+        justify-content: start
 
         &.right
             grid-column: 2
@@ -23,10 +23,15 @@
         font: var(--font-secondary-s)
         text-decoration: inherit
         text-shadow: var(--shadow-s)
-        position: relative
 
-        @media screen and ( max-width: var(--breakpoint-s) )
-            font: var(--font-secondary-xs)
+    & a, & .email
+        position: relative
+        z-index: 999
 
         &:hover, &:focus-visible
             text-shadow: var(--shadow-m)
+
+.back
+    align-self: end
+    grid-row: span 2
+    z-index: 99
