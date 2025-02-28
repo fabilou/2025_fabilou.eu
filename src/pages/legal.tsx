@@ -1,12 +1,13 @@
 import * as React from "react"
-import { graphql, HeadFC, PageProps } from "gatsby"
+import { HeadFC, PageProps } from "gatsby"
 
 import Popup from "../components/Popup"
+import EmailButton from "../components/EmailButton"
 
 const LegalPage: React.FC<PageProps> = () => {
 	return (
 		<Popup>
-			<h1>Legal Notice</h1>
+			<h2>Legal Notice</h2>
 			<section id="imprint">
 				<p>Controller of this website (§5 TMG):</p>
 				<address>
@@ -15,21 +16,21 @@ const LegalPage: React.FC<PageProps> = () => {
 					<p>10245 Berlin</p>
 					<p>Germany</p>
 					<p>
-						<a href="mailto:hello@fabilou.eu">hello@fabilou.eu</a>
+						<EmailButton text="hello@fabilou.eu" />
 					</p>
 				</address>
 			</section>
 			<section>
-				<h2>Design &amp; Code</h2>
+				<h3>Design &amp; Code</h3>
 				<p>Fabi Lou Viktoria Sax</p>
 			</section>
 			<section>
-				<h2>Fonts</h2>
-				{/* <p>EB Garamont by Georg Duffner, Octavio Pardo</p> */}
+				<h3>Fonts</h3>
+				<p>Apfel Grotezk by Collletttivo</p>
 				<p>Lunchtype25 by Stefan Wetterstrand</p>
 			</section>
 			<section id="copyright">
-				<h2>Copyright</h2>
+				<h3>Copyright</h3>
 				<p>
 					This the content of this website is subject to German copyright law.
 					The usage, reproduction or modification of its material (text, image,
@@ -38,7 +39,7 @@ const LegalPage: React.FC<PageProps> = () => {
 					Their copyright and terms of use may differ from those above.
 				</p>
 			</section>
-			<section id="privacy">
+			{/* <section id="privacy">
 				<h2>Privacy</h2>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam
@@ -99,7 +100,7 @@ const LegalPage: React.FC<PageProps> = () => {
 					quo blanditiis tempora sapiente, unde illum possimus sequi sunt rem
 					ab. Adipisci, nihil.
 				</p>
-			</section>
+			</section> */}
 		</Popup>
 	)
 }

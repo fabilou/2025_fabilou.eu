@@ -1,9 +1,15 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 
-import Layout from "../components/Layout"
+import { useGlobalContext } from "../components/GlobalContext"
 
 const IndexPage: React.FC<PageProps> = () => {
+	const { setProjectInfo, setProjectURL } = useGlobalContext()
+
+	React.useEffect(() => {
+		setProjectInfo(<></>)
+		setProjectURL(undefined)
+	}, [])
 	return <></>
 }
 

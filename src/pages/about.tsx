@@ -3,34 +3,32 @@ import { graphql, HeadFC, PageProps } from "gatsby"
 
 import Popup from "../components/Popup"
 import Tools from "../components/Tools"
+import EmailButton from "../components/EmailButton"
 
 const AboutPage: React.FC<PageProps> = () => {
 	return (
 		<>
 			<Popup>
-				<h1 className="visually-hidden">About</h1>
+				<h2>About</h2>
 				<section>
-					{/* <p>
-						My work is a joyful exploration of experiences through creative
-						technology and 3D imagery.
-					</p> */}
-					<p>I can not draw. That is why I learned to code.</p>
+					<p>I can't draw. That is why I learned to code.</p>
 					<p>
-						In my design studies at{" "}
+						I'm a freelance 3D designer and creative technologist based in
+						Berlin.
+					</p>
+					<p>
+						During my design studies at{" "}
 						<a href="https://hm.edu" target="_blank" rel="noreferrer">
 							Munich University of Applied Sciences
 						</a>
-						, I am experimenting with the connection between design and
-						technological developments.
-					</p>
-					<p>
-						Besides my studies, I collected experience at{" "}
+						, I explored the connection between design and technological
+						developments. Besides my studies, I collected experience at{" "}
 						<a href="https://bus.group" target="_blank" rel="noreferrer">
 							bus.group
 						</a>{" "}
 						and{" "}
 						<a href="https://agentur-khor.com" target="_blank" rel="noreferrer">
-							Agentur KHOR
+							Agentur&nbsp;KHOR
 						</a>
 						.
 					</p>
@@ -42,7 +40,7 @@ const AboutPage: React.FC<PageProps> = () => {
 					<Tools name="Touchdesigner" />
 					<Tools name="Unity" />
 					<Tools name="Unreal Engine" />
-					<Tools name="Web Technologies" />
+					<Tools name="Web Technologies" skills={["React", "Node.JS"]} />
 				</section>
 				<section>
 					<h3>Selected clients and collaborators</h3>
@@ -54,6 +52,13 @@ const AboutPage: React.FC<PageProps> = () => {
 					<Tools name="Postmates" />
 					<Tools name="Sotheby's" />
 					<Tools name="Zalando" />
+				</section>
+				<section>
+					<h3>Let's collaborate!</h3>
+					<p>
+						I'd love to hear about your ideas at{" "}
+						<EmailButton text="hello@fabilou.eu" />
+					</p>
 				</section>
 			</Popup>
 		</>
