@@ -6,8 +6,9 @@
     display: flex
     gap: var(--spacing-fixed-m)
     overflow: auto hidden
-    padding: 0 var(--spacing-l) var(--spacing-m)
+    padding: 0 var(--spacing-m) var(--spacing-m)
     scrollbar-width: none
+
     ::-webkit-scrollbar
         display: none
 
@@ -15,27 +16,4 @@
         cursor: grabbing
 
     & > *
-        // flex-basis: 30vw
         flex-shrink: 0
-        // max-width: min(min(50vh, 720px), 60%)
-        // max-height: 80%
-
-.thumbnail
-    border-radius: var(--radius-s)
-    display: grid
-    gap: var(--spacing-fixed-xs)
-    position: relative
-    overflow: hidden
-
-    &:hover .description
-        opacity: 1
-
-.description
-    inset: auto auto var(--spacing-fixed-s) var(--spacing-fixed-s)
-    opacity: 0
-    position: absolute
-    background-color: var(--color-off-white-50)
-    backdrop-filter: blur(16px)
-    border-radius: var(--radius-s)
-    font: var(--font-primary-xxs)
-    padding: var(--spacing-fixed-xs) var(--spacing-fixed-s)
