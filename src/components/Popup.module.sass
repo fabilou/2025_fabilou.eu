@@ -8,12 +8,13 @@
     border-radius: var(--radius-s)
     border: none
     inset: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) auto
+    height: 100%
     isolation: isolate
     min-height: calc( 100% - 2 * var(--spacing-xs ))
     overflow-y: auto
     padding: var(--spacing-xl) var(--spacing-l) var(--spacing-m)
     position: fixed
-    transition: transform var(--transition-s)
+    // transition: transform var(--transition-s)
     width: min(60ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
     z-index: 9999
 
@@ -22,12 +23,6 @@
 
         & + .overlay
             animation: fade-out-overlay ease var(--transition-s) forwards
-
-    &::after
-        content: ""
-        inset: 0
-        position: fixed
-        z-index: -1
 
 .overlay
     animation: fade-in-overlay ease var(--transition-s) forwards
