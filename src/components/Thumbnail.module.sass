@@ -1,0 +1,32 @@
+
+.thumbnail
+    border-radius: var(--radius-s)
+    overflow: hidden
+    position: relative
+
+    &.hidden
+        animation: fade-out var(--transition-s) forwards
+
+    &:hover .description
+        opacity: 1
+
+.description
+    backdrop-filter: blur(32px)
+    background-color: var(--color-off-white-50)
+    border-radius: var(--radius-s)
+    font: var(--font-primary-xxs)
+    inset: auto auto var(--spacing-fixed-s) var(--spacing-fixed-s)
+    opacity: 0
+    padding: 0.5em 1em
+    position: absolute
+    transition: opacity var(--transition-s)
+
+    & > *
+        color: var(--color-black)
+
+@keyframes fade-out
+    0%
+        max-width: 100%
+    100%
+        max-width: 0
+        display: none
