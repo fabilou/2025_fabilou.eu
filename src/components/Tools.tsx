@@ -9,9 +9,9 @@ interface ToolsProps {
 
 const Tools: React.FC<ToolsProps> = ({ name, skills }) => {
 	return (
-		<div className={styles.toolContainer}>
-			<p>{name}</p>
-			<div className={styles.toolDetails}>
+		<div className={styles.container}>
+			<p className={styles.name}>{name}</p>
+			<div className={styles.details}>
 				{skills && <p>{skills.join(" + ")}</p>}
 			</div>
 		</div>
