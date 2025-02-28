@@ -2,8 +2,9 @@ import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		title: `fabilou.eu`,
-		siteUrl: `https://www.fabilou.eu`,
+		title: "fabilou.eu",
+		siteUrl: "https://www.fabilou.eu",
+		author: "Fabi Lou Viktoria Sax",
 	},
 	// More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
 	// If you use VSCode you can also use the GraphQL plugin
@@ -11,18 +12,26 @@ const config: GatsbyConfig = {
 	graphqlTypegen: true,
 	plugins: [
 		"gatsby-plugin-image",
+		"gatsby-plugin-layout",
+		"gatsby-plugin-minify",
 		"gatsby-plugin-sass",
+		"gatsby-plugin-sharp",
 		"gatsby-plugin-sitemap",
-		`gatsby-plugin-layout`,
-		`gatsby-transformer-yaml`,
+		"gatsby-transformer-sharp",
+		"gatsby-transformer-yaml",
 		{
-			resolve: "gatsby-plugin-manifest",
+			resolve: `gatsby-plugin-manifest`,
 			options: {
-				icon: "src/data/favicon.png",
+				name: `Fabi Lou Viktoria Sax`,
+				short_name: `Fabi Lou Viktoria`,
+				start_url: `/`,
+				background_color: `#eee`,
+				theme_color: `#fff`,
+				display: `minimal-ui`,
+				icon: `src/data/favicon.png`,
+				lang: `en`,
 			},
 		},
-		"gatsby-plugin-sharp",
-		"gatsby-transformer-sharp",
 		{
 			resolve: "gatsby-source-filesystem",
 			options: {
@@ -30,6 +39,7 @@ const config: GatsbyConfig = {
 				path: "./src/data/",
 			},
 		},
+		"gatsby-plugin-offline",
 	],
 }
 
