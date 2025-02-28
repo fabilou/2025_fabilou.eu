@@ -1,0 +1,39 @@
+@use "../styles/global"
+
+.project-info
+    background-color: var(--color-off-white)
+    border-radius: var(--radius-s)
+    padding: var(--spacing-l) var(--spacing-l) var(--spacing-m)
+    aspect-ratio: 4 / 5
+    max-width: min(min(2 * var(--column-width), 75vw), 50vh)
+    overflow-y: auto
+
+    ::-webkit-scrollbar
+        display: initial
+
+.info
+    display: grid
+    gap: var(--spacing-m)
+
+    & > *
+        display: flex
+        flex-direction: row-reverse
+        // grid-template-columns: auto 1fr
+        align-items: last baseline
+        justify-content: start
+        gap: var(--spacing-fixed-s)
+        width: min-content
+
+        & > .label
+            font: var(--font-primary-xxs)
+            margin: 0
+            white-space: nowrap
+
+.value
+
+    & > span
+        white-space: nowrap
+
+        @media screen and ( max-width: global.$breakpoint-s )
+            flex-direction: column-reverse
+            gap: 0
