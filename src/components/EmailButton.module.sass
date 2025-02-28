@@ -1,0 +1,19 @@
+@use "../styles/global"
+
+.button
+    align-items: baseline
+    color: inherit
+    display: inline-flex
+    font: var(--font-secondary-s)
+    gap: var(--spacing-fixed-xs)
+    position: relative
+    text-decoration: inherit
+    text-shadow: var(--shadow-s)
+    z-index: inherit
+
+    &:hover, &:focus-visible
+        text-shadow: var(--shadow-m)
+
+.tool-tip
+    font: var(--font-primary-xxs)
+    text-shadow: none
