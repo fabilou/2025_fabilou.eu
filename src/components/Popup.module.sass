@@ -2,20 +2,16 @@
 
 .container
     animation: fade-in-popup ease var(--transition-s) forwards
-    // backdrop-filter: blur(128px)
     background: var(--color-off-white)
-    // background: var(--color-off-white-50)
     border-radius: var(--radius-s)
     border: none
     inset: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) auto
-    height: 100%
     isolation: isolate
     min-height: calc( 100% - 2 * var(--spacing-xs ))
     overflow-y: auto
     padding: var(--spacing-xl) var(--spacing-l) var(--spacing-m)
     position: fixed
-    // transition: transform var(--transition-s)
-    width: min(60ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
+    width: min(45ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
     z-index: 9999
 
     &.close
@@ -61,6 +57,7 @@
 @keyframes fade-in-popup
     0%
         translate: 100% 0
+
     100%
         translate: 0
 
