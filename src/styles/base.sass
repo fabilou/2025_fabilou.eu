@@ -26,12 +26,14 @@
     --font-secondary-xs: 300 var(--font-size-xs)/110% #{global.$typeface-secondary}
     --font-secondary-s: 300 var(--font-size-s)/110% #{global.$typeface-secondary}
 
+    --spacing-fixed-xxs: #{global.$spacing-fixed-xxs}
     --spacing-fixed-xs: #{global.$spacing-fixed-xs}
     --spacing-fixed-s: #{global.$spacing-fixed-s}
     --spacing-fixed-m: #{global.$spacing-fixed-m}
     --spacing-fixed-l: #{global.$spacing-fixed-l}
     --spacing-fixed-xl: #{global.$spacing-fixed-xl}
 
+    --spacing-xxs: #{global.$spacing-xxs}
     --spacing-xs: #{global.$spacing-xs}
     --spacing-s: #{global.$spacing-s}
     --spacing-m: #{global.$spacing-m}
@@ -54,13 +56,13 @@
         --font-size-s: #{global.$font-size-xs}
         --font-size-m: #{global.$font-size-s}
 
-        --spacing-fixed-xs: #{global.$spacing-fixed-xs}
+        --spacing-fixed-xs: #{global.$spacing-fixed-xxs}
         --spacing-fixed-s: #{global.$spacing-fixed-xs}
         --spacing-fixed-m: #{global.$spacing-fixed-s}
         --spacing-fixed-l: #{global.$spacing-fixed-m}
         --spacing-fixed-xl: #{global.$spacing-fixed-l}
 
-        --spacing-xs: #{global.$spacing-xs}
+        --spacing-xs: #{global.$spacing-xxs}
         --spacing-s: #{global.$spacing-xs}
         --spacing-m: #{global.$spacing-s}
         --spacing-l: #{global.$spacing-m}
@@ -79,7 +81,7 @@
     //     --color-white: #{global.$color-black}
 
 html
-    scroll-behavior: auto
+    scroll-behavior: smooth
 
 body
     font: var(--font-primary-s)
@@ -94,7 +96,7 @@ h2:not([class]), h3:not([class]), h4:not([class])
     margin-block-end: 0.5em
 
 p
-    max-width: 60ch
+    max-width: 45ch
 
     &:not([class])
         margin-block-end: 0.25em
