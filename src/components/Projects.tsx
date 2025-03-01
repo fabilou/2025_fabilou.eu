@@ -3,6 +3,7 @@ import { graphql, Link, useStaticQuery } from "gatsby"
 
 import { useGlobalContext } from "./GlobalContext"
 import Thumbnail from "./Thumbnail"
+import ProjectInfo from "./ProjectInfo"
 
 import * as styles from "./Projects.module.sass"
 
@@ -36,83 +37,121 @@ const Projects: React.FC<ProjectsProps> = ({ filter }) => {
 
 	const { projectInfo } = useGlobalContext()
 
-	const [grabbing, setGrabbing] = React.useState(false)
-	const [scrollStart, setScrollStart] = React.useState(0)
-	const [scroll, setScroll] = React.useState(0)
-
 	const containerRef = React.useRef<HTMLDivElement>(null)
 	const thumbnailRef = React.useRef<HTMLDivElement>(null)
-
-	React.useEffect(() => {
-		if (containerRef.current) {
-			containerRef.current.scrollLeft = 0
-		}
-	}, [])
+	const infoRef = React.useRef<HTMLDivElement>(null)
 
 	React.useEffect(() => {
 		const container = containerRef.current
 		if (!container) return
 
-		const handleWheel = (e: WheelEvent) => {
-			container.scrollLeft += e.deltaY
-		}
+		container.scrollLeft = 0
+	}, [filter])
 
-		container.addEventListener("wheel", handleWheel)
+	// React.useEffect(() => {
+	// 	const container = containerRef.current
+	// 	if (!container) return
 
-		return () => {
-			container.removeEventListener("wheel", handleWheel)
-		}
-	}, [])
+	// 	const handleWheel = (e: WheelEvent) => {
+	// 		container.scrollLeft += e.deltaY
+	// 	}
 
-	React.useEffect(() => {
-		const observer = new IntersectionObserver((entries) => {
-			console.log(entries.map((entry) => entry.target))
-		})
+	// 	container.addEventListener("wheel", handleWheel)
 
-		if (thumbnailRef.current) {
-			console.log(thumbnailRef.current)
-			observer.observe(thumbnailRef.current)
-		}
+	// 	return () => {
+	// 		container.removeEventListener("wheel", handleWheel)
+	// 	}
+	// }, [])
 
-		return () => {
-			if (thumbnailRef.current) {
-				observer.unobserve(thumbnailRef.current)
-			}
-		}
-	}, [])
+	// React.useEffect(() => {
+	// 	const info = infoRef.current
+	// 	if (!info) return
+
+	// 	const handleMouseEnter = (e: React.MouseEvent) => {
+	// 		containerRef.current?.removeEventListener("wheel", () => {})
+	// 	}
+
+	// 	info.addEventListener("wheel", handleWheel)
+
+	// 	return () => {
+	// 		info.removeEventListener("wheel", handleMouseEnter)
+	// 	}
+	// }, [])
+
+	// React.useEffect(() => {
+	// 	const observer = new IntersectionObserver((entries) => {
+	// 		console.log(entries.map((entry) => entry.target))
+	// 	})
+
+	// 	if (thumbnailRef.current) {
+	// 		console.log(thumbnailRef.current)
+	// 		observer.observe(thumbnailRef.current)
+	// 	}
+
+	// 	return () => {
+	// 		if (thumbnailRef.current) {
+	// 			observer.unobserve(thumbnailRef.current)
+	// 		}
+	// 	}
+	// }, [])
+
+	const [grabbing, setGrabbing] = React.useState(false)
+	const [scrollStart, setScrollStart] = React.useState(0)
+	const [scroll, setScroll] = React.useState(0)
+
+	const handleMouseDown = (e: React.MouseEvent) => {
+		e.preventDefault()
+
+		setGrabbing(true)
+		setScrollStart(e.pageX)
+		setScroll(e.currentTarget && e.currentTarget.scrollLeft)
+		e.currentTarget && e.currentTarget.classList.add(styles.grabbing)
+	}
+
+	const handleMouseUp = (e: React.MouseEvent) => {
+		setGrabbing(false)
+		e.currentTarget.classList.remove(styles.grabbing)
+	}
+
+	const handleMouseMove = (e: React.MouseEvent) => {
+		if (!grabbing) return
+		e.preventDefault()
+
+		e.currentTarget.scrollLeft = scroll - (e.pageX - scrollStart)
+	}
+
+	const handleMouseLeave = (e: React.MouseEvent) => {
+		setGrabbing(false)
+		e.currentTarget.classList.remove(styles.grabbing)
+	}
 
 	return (
 		<div>
 			<div
 				ref={containerRef}
 				className={styles.container}
-				onPointerDown={(e) => {
-					e.preventDefault()
-					setGrabbing(true)
-					setScrollStart(e.pageX)
-					setScroll(e.currentTarget.scrollLeft)
-					e.currentTarget.classList.add(styles.grabbing)
-				}}
-				onPointerUp={(e) => {
-					setGrabbing(false)
-					e.currentTarget.classList.remove(styles.grabbing)
-				}}
-				onPointerLeave={(e) => {
-					setGrabbing(false)
-					e.currentTarget.classList.remove(styles.grabbing)
-				}}
-				onPointerMove={(e) => {
-					if (!grabbing) return
-					e.preventDefault()
-					const x = e.pageX
-					const move = x - scrollStart
-					e.currentTarget.scrollLeft = scroll - move
-				}}
+				onMouseDown={(e) => handleMouseDown(e)}
+				onMouseUp={(e) => handleMouseUp(e)}
+				onMouseLeave={(e) => handleMouseLeave(e)}
+				onMouseMove={(e) => handleMouseMove(e)}
 			>
-				{projectInfo ? projectInfo : null}
+				{projectInfo !== null ? (
+					<ProjectInfo
+						title={projectInfo.title}
+						description={projectInfo.description}
+						info={projectInfo.info}
+						ref={infoRef}
+					/>
+				) : (
+					<></>
+				)}
 				{data.allGalleryYaml.edges.map((item: any, i: number) => (
 					<Thumbnail
-						caption={item.node.title ? item.node.title : null}
+						caption={
+							item.node.title && item.node.slug !== filter
+								? item.node.title
+								: null
+						}
 						hidden={filter !== undefined && item.node.slug !== filter}
 						image={
 							item.node.thumbnail.childImageSharp
@@ -120,6 +159,7 @@ const Projects: React.FC<ProjectsProps> = ({ filter }) => {
 								: item.node.thumbnail.publicURL
 						}
 						key={i}
+						ref={thumbnailRef}
 						slug={item.node.slug ? item.node.slug : null}
 						type={item.node.thumbnail.internal.mediaType}
 						width={item.node.width}
