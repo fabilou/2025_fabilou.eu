@@ -7,16 +7,10 @@ import ProjectInfo from "../components/ProjectInfo"
 const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
 	const { setProjectInfo, setProjectURL } = useGlobalContext()
 
-	const project = data.projectsYaml
+	const { title, description, info, tags } = data.projectsYaml
 
 	React.useEffect(() => {
-		setProjectInfo(
-			<ProjectInfo
-				description={project.description}
-				info={project.info}
-				title={project.title}
-			/>
-		)
+		setProjectInfo({ title, description, info, tags })
 		setProjectURL(location.pathname)
 	}, [])
 
