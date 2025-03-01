@@ -1,8 +1,20 @@
 import * as React from "react"
 
 interface GlobalContextType {
-	projectInfo: React.ReactElement | undefined
-	setProjectInfo: (projectInfo: React.ReactElement | undefined) => void
+	projectInfo: {
+		title: string
+		description: string
+		info: [{ label: string; value: [string] }]
+		tags: [string]
+	} | null
+	setProjectInfo: (
+		projectInfo: {
+			title: string
+			description: string
+			info: [{ label: string; value: [string] }]
+			tags: [string]
+		} | null
+	) => void
 	projectURL: string | undefined
 	setProjectURL: (projectURL: string | undefined) => void
 }
@@ -22,9 +34,12 @@ const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({
 		undefined
 	)
 
-	const [projectInfo, setProjectInfo] = React.useState<
-		React.ReactElement | undefined
-	>(<></>)
+	const [projectInfo, setProjectInfo] = React.useState<{
+		title: string
+		description: string
+		info: [{ label: string; value: [string] }]
+		tags: [string]
+	} | null>(null)
 
 	return (
 		<GlobalContext.Provider

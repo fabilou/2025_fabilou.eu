@@ -7,7 +7,7 @@ const IndexPage: React.FC<PageProps> = () => {
 	const { setProjectInfo, setProjectURL } = useGlobalContext()
 
 	React.useEffect(() => {
-		setProjectInfo(<></>)
+		setProjectInfo(null)
 		setProjectURL(undefined)
 	}, [])
 	return <></>
