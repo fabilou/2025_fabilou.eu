@@ -2,6 +2,9 @@
 
 .content
     position: fixed
-    inset: 0 0 var(--spacing-l)
+    inset: 0 0 var(--spacing-m)
     display: grid
     align-items: end
+
+    @media screen and ( max-width: global.$breakpoint-s )
+        bottom: var(--spacing-l)
