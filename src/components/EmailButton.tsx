@@ -9,6 +9,7 @@ interface EmailButtonProps {
 
 const EmailButton: React.FC<EmailButtonProps> = ({ className, text }) => {
 	const [copied, setCopied] = React.useState(false)
+
 	return (
 		<button
 			className={[className, styles.button].join(" ")}

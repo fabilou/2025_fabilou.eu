@@ -23,9 +23,23 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 	}
 
 	const handleMouseDown = (e: React.MouseEvent) => {
-		if (!isInside) {
-			closePopup()
-		}
+		popup.current &&
+			setIsInside(() => {
+				const bounds = popup.current?.getBoundingClientRect()
+
+				if (
+					bounds &&
+					bounds.top <= e.clientY &&
+					e.clientY <= bounds.top + bounds.height &&
+					bounds.left <= e.clientX &&
+					e.clientX <= bounds.left + bounds.width
+				) {
+					return true
+				} else {
+					closePopup()
+					return false
+				}
+			})
 	}
 
 	return (
@@ -33,8 +47,8 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 			<div
 				className={styles.container}
 				ref={popup}
-				onMouseEnter={() => setIsInside(true)}
-				onMouseLeave={() => setIsInside(false)}
+				onPointerEnter={() => setIsInside(true)}
+				onPointerLeave={() => setIsInside(false)}
 			>
 				<button className={styles.button} onClick={() => closePopup()}>
 					Close
