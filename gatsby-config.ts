@@ -2,9 +2,13 @@ import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		title: "fabilou.eu",
 		siteUrl: "https://www.fabilou.eu",
 		author: "Fabi Lou Viktoria Sax",
+		title: "Fabi Lou Viktoria",
+		titleTemplate: " // Fabi Lou Viktoria",
+		description:
+			"I'm a freelance 3D designer, web designer and creative technologist based in Berlin.",
+		lang: "en",
 	},
 	// More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
 	// If you use VSCode you can also use the GraphQL plugin
@@ -13,7 +17,6 @@ const config: GatsbyConfig = {
 	plugins: [
 		"gatsby-plugin-image",
 		"gatsby-plugin-layout",
-		"gatsby-plugin-minify",
 		"gatsby-plugin-sass",
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-sitemap",
