@@ -9,34 +9,57 @@ interface ImageProps {
 	mediaType: string
 }
 
-const Image: React.FC<ImageProps> = React.forwardRef(
-	({ img, mediaType }, ref: ForwardedRef<HTMLVideoElement>) => {
-		if (mediaType === "video/mp4" || mediaType === "video/webm") {
-			return (
-				<video
-					autoPlay
-					controls={false}
-					controlsList="nodownload"
-					disablePictureInPicture
-					loop
-					muted
-					playsInline
-					ref={ref}
-				>
-					<source src={img} type={mediaType} />
-				</video>
-			)
-		} else if (
-			mediaType === "image/jpeg" ||
-			mediaType === "image/png" ||
-			mediaType === "image/webp" ||
-			mediaType === "image/gif" ||
-			mediaType === "image/svg"
-		) {
-			return <GatsbyImage image={img} alt="" />
-		} else return <></>
-	}
-)
+const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
+	const video = React.useRef<HTMLVideoElement>(null)
+
+	React.useEffect(() => {
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					video.current?.play()
+				} else {
+					video.current?.pause()
+				}
+			})
+		})
+
+		if (video.current) {
+			observer.observe(video.current)
+		}
+
+		return () => {
+			if (video.current) {
+				observer.unobserve(video.current)
+			}
+		}
+	}, [])
+
+	if (mediaType === "video/mp4" || mediaType === "video/webm") {
+		return (
+			<video
+				autoPlay
+				controls={false}
+				controlsList="nodownload"
+				disablePictureInPicture
+				loop
+				muted
+				playsInline
+				preload="metadata"
+				ref={video}
+			>
+				<source src={img} type={mediaType} />
+			</video>
+		)
+	} else if (
+		mediaType === "image/jpeg" ||
+		mediaType === "image/png" ||
+		mediaType === "image/webp" ||
+		mediaType === "image/gif" ||
+		mediaType === "image/svg"
+	) {
+		return <GatsbyImage image={img} alt="" />
+	} else return <></>
+}
 
 interface ThumbnailProps {
 	caption?: string
@@ -50,33 +73,6 @@ interface ThumbnailProps {
 
 const Thumbnail: React.FC<ThumbnailProps> = React.forwardRef(
 	({ caption, image, hidden, slug, type, width }, ref) => {
-		// const thumbnail = React.useRef<HTMLDivElement>(null)
-		const video = React.useRef<HTMLVideoElement>(null)
-
-		// const [visible, setVisible] = React.useState(true)
-
-		// React.useEffect(() => {
-		// 	const observer = new IntersectionObserver((entries) => {
-		// 		entries.forEach((entry) => {
-		// 			if (entry.isIntersecting) {
-		// 				setVisible(true)
-		// 			} else {
-		// 				setVisible(false)
-		// 			}
-		// 		})
-		// 	})
-
-		// 	if (thumbnail.current) {
-		// 		observer.observe(thumbnail.current)
-		// 	}
-
-		// 	return () => {
-		// 		if (thumbnail.current) {
-		// 			observer.unobserve(thumbnail.current)
-		// 		}
-		// 	}
-		// }, [])
-
 		return (
 			<figure
 				className={styles.thumbnail}
