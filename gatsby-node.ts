@@ -19,7 +19,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
 	const result: Data = await graphql(`
 		query {
-			allGalleryYaml(filter: { slug: { glob: "!null" } }) {
+			allProjectsYaml {
 				nodes {
 					slug
 				}
@@ -32,7 +32,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 	}
 
 	// Create blog post pages.
-	const projects = result.data.allGalleryYaml.nodes
+	const projects = result.data.allProjectsYaml.nodes
 
 	// you'll call `createPage` for each result
 	projects.forEach(async (project: any) => {
