@@ -3,6 +3,7 @@ import { HeadFC, PageProps } from "gatsby"
 
 import Popup from "../components/Popup"
 import EmailButton from "../components/EmailButton"
+import Seo from "../components/seo"
 
 const LegalPage: React.FC<PageProps> = () => {
 	return (
@@ -107,4 +108,8 @@ const LegalPage: React.FC<PageProps> = () => {
 
 export default LegalPage
 
-export const Head: HeadFC = () => <title>Fabi Lou Viktoria</title>
+export const Head: HeadFC = () => (
+	<Seo title="Legal Notice">
+		<meta name="robots" content="noindex"></meta>
+	</Seo>
+)

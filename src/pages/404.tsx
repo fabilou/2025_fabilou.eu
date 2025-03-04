@@ -2,6 +2,7 @@ import * as React from "react"
 import { HeadFC, PageProps } from "gatsby"
 
 import Popup from "../components/Popup"
+import Seo from "../components/seo"
 
 const Error404Page: React.FC<PageProps> = () => {
 	return (
@@ -13,4 +14,4 @@ const Error404Page: React.FC<PageProps> = () => {
 
 export default Error404Page
 
-export const Head: HeadFC = () => <title>Fabi Lou Viktoria</title>
+export const Head: HeadFC = () => <Seo title="Error 404" />

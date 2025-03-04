@@ -1,9 +1,10 @@
 import * as React from "react"
-import { graphql, HeadFC, PageProps } from "gatsby"
+import { HeadFC, PageProps } from "gatsby"
 
 import Popup from "../components/Popup"
 import Tools from "../components/Tools"
 import EmailButton from "../components/EmailButton"
+import Seo from "../components/seo"
 
 const AboutPage: React.FC<PageProps> = () => {
 	return (
@@ -13,8 +14,8 @@ const AboutPage: React.FC<PageProps> = () => {
 				<section>
 					<p>I can't draw. That is why I learned to code.</p>
 					<p>
-						I'm a freelance 3D designer and creative technologist based in
-						Berlin.
+						I'm a freelance 3D designer, web designer and creative technologist
+						based in Berlin.
 					</p>
 					<p>
 						During my design studies at{" "}
@@ -67,4 +68,4 @@ const AboutPage: React.FC<PageProps> = () => {
 
 export default AboutPage
 
-export const Head: HeadFC = () => <title>About</title>
+export const Head: HeadFC = () => <Seo title="About" />
