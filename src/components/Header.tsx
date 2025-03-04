@@ -16,18 +16,30 @@ const Header: React.FC = () => {
 			<nav>
 				<ul className={styles.navList}>
 					<li>
-						<Link to="/">
-							<h1>Fabi Lou Viktoria Sax</h1>
-						</Link>
+						<h1>
+							<Link to="/">Fabi Lou Viktoria Sax</Link>
+						</h1>
 					</li>
 					<li>
 						<EmailButton className={styles.email} text="hello@fabilou.eu" />
 					</li>
 					<li>
-						<a href="https://instagram.com/fabilousax">Instagram</a>
+						<a
+							href="https://instagram.com/fabilousax"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Instagram
+						</a>
 					</li>
 					<li>
-						<a href="https://github.com/fabilou">Github</a>
+						<a
+							href="https://github.com/fabilou"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Github
+						</a>
 					</li>
 					{projectURL ? (
 						<li className={styles.back}>
