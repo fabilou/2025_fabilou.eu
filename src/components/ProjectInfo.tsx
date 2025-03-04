@@ -5,12 +5,14 @@ import * as styles from "./ProjectInfo.module.sass"
 interface ProjectInfoProps {
 	description: string
 	info?: [{ label: string; value: [string] }]
-	title: string
+	links?: [{ label: string; target: string }]
+	tags?: [string]
 	ref?: React.ForwardedRef<HTMLDivElement>
+	title: string
 }
 
 const ProjectInfo: React.FC<ProjectInfoProps> = React.forwardRef(
-	({ description, info, title }, ref) => {
+	({ description, info, links, tags, title }, ref) => {
 		return (
 			<div className={styles.projectInfo} ref={ref}>
 				<h2>{title}</h2>
@@ -36,6 +38,27 @@ const ProjectInfo: React.FC<ProjectInfoProps> = React.forwardRef(
 							))}
 						</div>
 					)}
+				</section>
+				{links && (
+					<section>
+						<h3>Links</h3>
+						{links.map((link: any, i: number) => (
+							<p key={i}>
+								<a href={link.target} target="_blank" rel="noreferrer">
+									{link.label}
+								</a>
+							</p>
+						))}
+					</section>
+				)}
+				<section>
+					<div className={styles.tags}>
+						{tags?.map((tag: string, i: number) => (
+							<div className={styles.tag} key={i}>
+								{tag}
+							</div>
+						))}
+					</div>
 				</section>
 			</div>
 		)

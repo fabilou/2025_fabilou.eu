@@ -30,16 +30,29 @@
             flex-direction: column-reverse
             gap: 0
 
-        & > .label
+        &  .label
             font: var(--font-primary-xxs)
             margin: 0
             white-space: nowrap
 
-.value
+        & .value
 
-    & > span
-        white-space: nowrap
+            & > span
+                white-space: nowrap
 
-        @media screen and ( max-width: global.$breakpoint-s )
-            flex-direction: column-reverse
-            gap: 0
+                @media screen and ( max-width: global.$breakpoint-s )
+                    flex-direction: column-reverse
+                    gap: 0
+
+.tags
+    display: flex
+    gap: var(--spacing-fixed-s)
+
+.tag
+    background-color: var(--color-black)
+    border-radius: var(--radius-s)
+    font: var(--font-primary-xxs)
+    padding: 0.5em 1em
+    align-items: baseline
+    gap: var(--spacing-fixed-xxs)
+    color: var(--color-white)
