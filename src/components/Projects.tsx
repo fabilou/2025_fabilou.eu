@@ -137,10 +137,12 @@ const Projects: React.FC<ProjectsProps> = ({ filter }) => {
 			>
 				{projectInfo !== null ? (
 					<ProjectInfo
-						title={projectInfo.title}
 						description={projectInfo.description}
 						info={projectInfo.info}
+						links={projectInfo.links}
 						ref={infoRef}
+						tags={projectInfo.tags}
+						title={projectInfo.title}
 					/>
 				) : (
 					<></>
