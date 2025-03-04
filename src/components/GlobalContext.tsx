@@ -5,6 +5,7 @@ interface GlobalContextType {
 		title: string
 		description: string
 		info: [{ label: string; value: [string] }]
+		links: [{ label: string; target: string }]
 		tags: [string]
 	} | null
 	setProjectInfo: (
@@ -12,6 +13,7 @@ interface GlobalContextType {
 			title: string
 			description: string
 			info: [{ label: string; value: [string] }]
+			links: [{ label: string; target: string }]
 			tags: [string]
 		} | null
 	) => void
@@ -38,6 +40,7 @@ const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({
 		title: string
 		description: string
 		info: [{ label: string; value: [string] }]
+		links: [{ label: string; target: string }]
 		tags: [string]
 	} | null>(null)
 
