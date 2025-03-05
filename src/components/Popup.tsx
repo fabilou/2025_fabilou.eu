@@ -12,8 +12,7 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 
 	const popup = React.useRef<HTMLDivElement>(null)
 	const popupContainer = React.useRef<HTMLDivElement>(null)
-
-	const [isInside, setIsInside] = React.useState(false)
+	const button = React.useRef<HTMLButtonElement>(null)
 
 	const closePopup = () => {
 		popup.current?.classList.add(styles.close)
@@ -23,33 +22,27 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 	}
 
 	const handleMouseDown = (e: React.MouseEvent) => {
-		popup.current &&
-			setIsInside(() => {
-				const bounds = popup.current?.getBoundingClientRect()
+		if (popup.current) {
+			const bounds = popup.current?.getBoundingClientRect()
 
-				if (
-					bounds &&
-					bounds.top <= e.clientY &&
-					e.clientY <= bounds.top + bounds.height &&
-					bounds.left <= e.clientX &&
-					e.clientX <= bounds.left + bounds.width
-				) {
-					return true
-				} else {
-					closePopup()
-					return false
-				}
-			})
+			if (
+				bounds &&
+				bounds.top <= e.clientY &&
+				e.clientY <= bounds.top + bounds.height &&
+				bounds.left <= e.clientX &&
+				e.clientX <= bounds.left + bounds.width
+			) {
+				return true
+			} else {
+				closePopup()
+				return false
+			}
+		}
 	}
 
 	return (
 		<div onMouseDown={(e) => handleMouseDown(e)} ref={popupContainer}>
-			<div
-				className={styles.container}
-				ref={popup}
-				onPointerEnter={() => setIsInside(true)}
-				onPointerLeave={() => setIsInside(false)}
-			>
+			<div className={styles.container} ref={popup}>
 				<button className={styles.button} onClick={() => closePopup()}>
 					Close
 				</button>
