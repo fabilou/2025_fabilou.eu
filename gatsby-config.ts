@@ -21,7 +21,12 @@ const config: GatsbyConfig = {
 		"gatsby-plugin-sharp",
 		"gatsby-plugin-sitemap",
 		"gatsby-transformer-sharp",
-		"gatsby-transformer-yaml",
+		{
+			resolve: "gatsby-transformer-yaml",
+			options: {
+				typeName: "Projects",
+			},
+		},
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
@@ -40,6 +45,13 @@ const config: GatsbyConfig = {
 			options: {
 				name: "data",
 				path: "./src/data/",
+			},
+		},
+		{
+			resolve: "gatsby-source-filesystem",
+			options: {
+				name: "projects",
+				path: "./src/data/projects",
 			},
 		},
 		"gatsby-plugin-offline",
