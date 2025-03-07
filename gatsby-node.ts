@@ -1,4 +1,4 @@
-import { GatsbyNode } from "gatsby"
+import { GatsbyNode, graphql } from "gatsby"
 import path from "path"
 
 type Data = {
@@ -19,7 +19,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
 	const result: Data = await graphql(`
 		query {
-			allProjectsYaml {
+			allProjects {
 				nodes {
 					slug
 				}
@@ -32,7 +32,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 	}
 
 	// Create blog post pages.
-	const projects = result.data.allProjectsYaml.nodes
+	const projects = result.data.allProjects.nodes
 
 	// you'll call `createPage` for each result
 	projects.forEach(async (project: any) => {
