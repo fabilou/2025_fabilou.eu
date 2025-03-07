@@ -1,15 +1,15 @@
 import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import { graphql, HeadFC, PageProps } from "gatsby"
 
 import { useGlobalContext } from "../components/GlobalContext"
 import Seo from "../components/seo"
 
-const IndexPage: React.FC<PageProps> = () => {
-	const { setProjectInfo, setProjectURL } = useGlobalContext()
+const IndexPage: React.FC<PageProps> = ({ data }: any) => {
+	const { setProject, setProjectURL } = useGlobalContext()
 
 	React.useEffect(() => {
-		setProjectInfo(null)
-		setProjectURL(undefined)
+		setProjectURL(null)
+		setProject(data.projects)
 	}, [])
 	return <></>
 }
@@ -17,3 +17,27 @@ const IndexPage: React.FC<PageProps> = () => {
 export default IndexPage
 
 export const Head: HeadFC = () => <Seo />
+
+export const query = graphql`
+	query {
+		projects(slug: { eq: "index" }) {
+			media {
+				link {
+					path
+					title
+				}
+				path {
+					childImageSharp {
+						gatsbyImageData
+					}
+					internal {
+						mediaType
+					}
+					publicURL
+				}
+				width
+			}
+			slug
+		}
+	}
+`

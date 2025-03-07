@@ -2,16 +2,15 @@ import * as React from "react"
 import { HeadFC, graphql, PageProps } from "gatsby"
 
 import { useGlobalContext } from "../components/GlobalContext"
+import Projects from "../components/Projects"
 import Seo from "../components/seo"
 
 const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
-	const { setProjectInfo, setProjectURL } = useGlobalContext()
-
-	const { title, description, info, links, tags } = data.projectsYaml
+	const { setProjectURL, setProject } = useGlobalContext()
 
 	React.useEffect(() => {
-		setProjectInfo({ title, description, info, links, tags })
 		setProjectURL(location.pathname)
+		setProject(data.projects)
 	}, [])
 
 	return <></>
@@ -19,25 +18,44 @@ const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
 
 export default ProjectTemplatePage
 
-export const Head: HeadFC = ({ data }: any) => (
-	<Seo title={data.projectsYaml.title} slug={data.projectsYaml.slug} />
-)
+export const Head: HeadFC = ({ data }: any) =>
+	data.projects.projectInfo && (
+		<Seo title={data.projects.projectInfo.title} slug={data.projects.slug} />
+	)
 
 export const query = graphql`
 	query ($slug: String!) {
-		projectsYaml(slug: { eq: $slug }) {
-			description
-			info {
-				label
-				value
+		projects(slug: { eq: $slug }) {
+			media {
+				link {
+					path
+					title
+				}
+				path {
+					childImageSharp {
+						gatsbyImageData
+					}
+					internal {
+						mediaType
+					}
+					publicURL
+				}
+				width
 			}
-			links {
-				label
-				target
+			projectInfo {
+				description
+				info {
+					label
+					value
+				}
+				links {
+					label
+					target
+				}
+				tags
+				title
 			}
 			slug
-			tags
-			title
 		}
 	}
 `
