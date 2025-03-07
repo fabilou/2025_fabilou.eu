@@ -1,24 +1,11 @@
 import * as React from "react"
+import { GatsbyImageProps } from "gatsby-plugin-image"
 
 interface GlobalContextType {
-	projectInfo: {
-		title: string
-		description: string
-		info: [{ label: string; value: [string] }]
-		links: [{ label: string; target: string }]
-		tags: [string]
-	} | null
-	setProjectInfo: (
-		projectInfo: {
-			title: string
-			description: string
-			info: [{ label: string; value: [string] }]
-			links: [{ label: string; target: string }]
-			tags: [string]
-		} | null
-	) => void
-	projectURL: string | undefined
-	setProjectURL: (projectURL: string | undefined) => void
+	project: any | undefined
+	setProject: (project: any) => void
+	projectURL: string | undefined | null
+	setProjectURL: (projectURL: string | undefined | null) => void
 }
 
 const GlobalContext = React.createContext<GlobalContextType | undefined>(
@@ -32,23 +19,17 @@ interface GlobalContextProviderProps {
 const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({
 	children,
 }) => {
-	const [projectURL, setProjectURL] = React.useState<string | undefined>(
+	const [projectURL, setProjectURL] = React.useState<string | undefined | null>(
 		undefined
 	)
 
-	const [projectInfo, setProjectInfo] = React.useState<{
-		title: string
-		description: string
-		info: [{ label: string; value: [string] }]
-		links: [{ label: string; target: string }]
-		tags: [string]
-	} | null>(null)
+	const [project, setProject] = React.useState<any>()
 
 	return (
 		<GlobalContext.Provider
 			value={{
-				projectInfo: projectInfo,
-				setProjectInfo: setProjectInfo,
+				project: project,
+				setProject: setProject,
 				projectURL: projectURL,
 				setProjectURL: setProjectURL,
 			}}
