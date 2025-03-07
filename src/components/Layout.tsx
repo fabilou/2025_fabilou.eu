@@ -8,24 +8,23 @@ import Footer from "./Footer"
 import "../styles/reset.sass"
 import "../styles/fonts.sass"
 import "../styles/base.sass"
-import * as styles from "./Layout.module.sass"
 
 interface LayoutProps {
 	children?: React.ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-	const { projectURL } = useGlobalContext()
-
-	const filter = projectURL?.replace(/^\/|\/$/g, "")
+	const { project } = useGlobalContext()
 
 	return (
-		<main className={styles.content}>
+		<>
 			<Header />
-			{children}
-			<Projects filter={filter} />
+			<main>
+				{children}
+				<Projects key={project && project.slug} />
+			</main>
 			<Footer />
-		</main>
+		</>
 	)
 }
 
