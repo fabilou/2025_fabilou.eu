@@ -46,13 +46,15 @@
 
 .tags
     display: flex
+    flex-wrap: wrap
     gap: var(--spacing-fixed-s)
 
 .tag
+    align-items: baseline
     background-color: var(--color-black)
     border-radius: var(--radius-s)
-    font: var(--font-primary-xxs)
-    padding: 0.5em 1em
-    align-items: baseline
-    gap: var(--spacing-fixed-xxs)
     color: var(--color-white)
+    font: var(--font-primary-xxs)
+    gap: var(--spacing-fixed-xxs)
+    padding: 0.5em 1em
+    white-space: nowrap
