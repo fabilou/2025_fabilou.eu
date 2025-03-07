@@ -9,10 +9,12 @@
     padding: 0 var(--spacing-m) var(--spacing-xs)
     scrollbar-width: none
     position: absolute
-    inset: auto 0 0
-
+    inset: auto 0 var(--spacing-m)
     ::-webkit-scrollbar
         display: none
+
+    @media screen and ( max-width: global.$breakpoint-s )
+        bottom: var(--spacing-l)
 
     &.grabbing
         cursor: grabbing
