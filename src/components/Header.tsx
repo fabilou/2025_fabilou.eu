@@ -9,8 +9,6 @@ import * as styles from "./Header.module.sass"
 const Header: React.FC = () => {
 	const { projectURL } = useGlobalContext()
 
-	const [copied, setCopied] = React.useState(false)
-
 	return (
 		<header className={styles.header}>
 			<nav>
@@ -41,12 +39,10 @@ const Header: React.FC = () => {
 							Github
 						</a>
 					</li>
-					{projectURL ? (
+					{projectURL && (
 						<li className={styles.back}>
 							<Link to="/">Back</Link>
 						</li>
-					) : (
-						<></>
 					)}
 					<li className={styles.right}>
 						<Link to="/about">About</Link>
