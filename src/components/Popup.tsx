@@ -12,7 +12,8 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 
 	const popup = React.useRef<HTMLDivElement>(null)
 	const popupContainer = React.useRef<HTMLDivElement>(null)
-	const button = React.useRef<HTMLButtonElement>(null)
+
+	console.log(projectURL)
 
 	const closePopup = () => {
 		popup.current?.classList.add(styles.close)
@@ -46,7 +47,7 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 				<button className={styles.button} onClick={() => closePopup()}>
 					Close
 				</button>
-				<div>{children}</div>
+				<div className={styles.content}>{children}</div>
 			</div>
 			<div className={styles.overlay}></div>
 		</div>

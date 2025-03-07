@@ -1,18 +1,23 @@
 @use "../styles/global"
 
 .container
+    align-items: start
     animation: fade-in-popup ease var(--transition-s) forwards
     background: var(--color-off-white)
     border-radius: var(--radius-s)
     border: none
+    display: grid
+    grid-template-rows: calc( var(--spacing-xl) - var(--spacing-xs) ) auto
     inset: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) auto
-    isolation: isolate
     min-height: calc( 100% - 2 * var(--spacing-xs ))
     overflow-y: auto
-    padding: var(--spacing-xl) var(--spacing-l) var(--spacing-m)
+    padding-block: var(--spacing-l)
     position: fixed
     width: min(45ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
     z-index: 9999
+
+    & .content
+        padding-inline: var(--spacing-l)
 
     &.close
         animation: fade-out-popup ease var(--transition-s) forwards
@@ -30,10 +35,11 @@
 
 .button
     font: var(--font-secondary-s)
-    inset: var(--spacing-m) var(--spacing-l) auto auto
-    position: fixed
+    position: sticky
+    justify-self: end
     text-shadow: var(--shadow-s)
-    z-index: 10
+    top: 0
+    margin-inline-end: var(--spacing-l)
 
     &:hover, &:focus-visible
         text-shadow: var(--shadow-m)
