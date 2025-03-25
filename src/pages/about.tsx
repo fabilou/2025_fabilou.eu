@@ -38,6 +38,7 @@ const AboutPage: React.FC<PageProps> = () => {
 					<h3>Tools I use</h3>
 					<Tools name="Houdini" skills={["Redshift", "Octane"]} />
 					<Tools name="Blender" />
+					<Tools name="Cinema 4D" />
 					<Tools name="Touchdesigner" />
 					<Tools name="Unity" />
 					<Tools name="Unreal Engine" />
