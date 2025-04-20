@@ -8,8 +8,16 @@ const IndexPage: React.FC<PageProps> = ({ data }: any) => {
 	const { setProject, setProjectURL } = useGlobalContext()
 
 	React.useEffect(() => {
-		setProjectURL(null)
-		setProject(data.projects)
+		if (!document.startViewTransition) {
+			setProjectURL(null)
+			setProject(data.projects)
+			return
+		} else {
+			document.startViewTransition(() => {
+				setProjectURL(null)
+				setProject(data.projects)
+			})
+		}
 	}, [])
 	return <></>
 }

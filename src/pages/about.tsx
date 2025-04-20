@@ -1,12 +1,22 @@
 import * as React from "react"
-import { HeadFC, PageProps } from "gatsby"
+import { HeadFC, graphql, PageProps } from "gatsby"
 
+import { useGlobalContext } from "../components/GlobalContext"
 import Popup from "../components/Popup"
 import Tools from "../components/Tools"
 import EmailButton from "../components/EmailButton"
 import Seo from "../components/seo"
 
-const AboutPage: React.FC<PageProps> = () => {
+const AboutPage: React.FC<PageProps> = ({ data }: any) => {
+	const { setProject, projectURL, setProjectURL } = useGlobalContext()
+
+	React.useEffect(() => {
+		if (!projectURL) {
+			setProjectURL(null)
+			setProject(data.projects)
+		}
+	}, [])
+
 	return (
 		<>
 			<Popup>
@@ -37,8 +47,8 @@ const AboutPage: React.FC<PageProps> = () => {
 				<section>
 					<h3>Tools I use</h3>
 					<Tools name="Houdini" skills={["Redshift", "Octane"]} />
-					<Tools name="Blender" />
 					<Tools name="Cinema 4D" />
+					<Tools name="Blender" />
 					<Tools name="Touchdesigner" />
 					<Tools name="Unity" />
 					<Tools name="Unreal Engine" />
@@ -70,3 +80,27 @@ const AboutPage: React.FC<PageProps> = () => {
 export default AboutPage
 
 export const Head: HeadFC = () => <Seo title="About" />
+
+export const query = graphql`
+	query {
+		projects(slug: { eq: "index" }) {
+			media {
+				link {
+					path
+					title
+				}
+				path {
+					childImageSharp {
+						gatsbyImageData
+					}
+					internal {
+						mediaType
+					}
+					publicURL
+				}
+				width
+			}
+			slug
+		}
+	}
+`

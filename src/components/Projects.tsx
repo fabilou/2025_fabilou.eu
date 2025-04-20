@@ -9,7 +9,7 @@ import * as styles from "./Projects.module.sass"
 const Projects: React.FC = () => {
 	const { project } = useGlobalContext()
 
-	const containerRef = React.useRef<HTMLDivElement>(null)
+	const containerRef = React.useRef<HTMLUListElement>(null)
 	const thumbnailRef = React.useRef<HTMLDivElement>(null)
 	const infoRef = React.useRef<HTMLDivElement>(null)
 
@@ -45,7 +45,7 @@ const Projects: React.FC = () => {
 
 	return (
 		<div>
-			<div
+			<ul
 				ref={containerRef}
 				className={styles.container}
 				onMouseDown={(e) => handleMouseDown(e)}
@@ -58,7 +58,6 @@ const Projects: React.FC = () => {
 						description={project.projectInfo.description}
 						info={project.projectInfo.info}
 						links={project.projectInfo.links}
-						ref={infoRef}
 						tags={project.projectInfo.tags}
 						title={project.projectInfo.title}
 					/>
@@ -73,13 +72,12 @@ const Projects: React.FC = () => {
 									: item.path.publicURL
 							}
 							key={i}
-							ref={thumbnailRef}
 							slug={item.link && item.link.path}
 							type={item.path.internal.mediaType}
 							width={item.width}
 						/>
 					))}
-			</div>
+			</ul>
 		</div>
 	)
 }

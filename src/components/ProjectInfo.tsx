@@ -7,14 +7,22 @@ interface ProjectInfoProps {
 	info?: [{ label: string; value: [string] }]
 	links?: [{ label: string; target: string }]
 	tags?: [string]
-	ref?: React.ForwardedRef<HTMLDivElement>
+	ref?: React.ForwardedRef<HTMLLIElement>
+	style?: React.CSSProperties
 	title: string
 }
 
-const ProjectInfo: React.FC<ProjectInfoProps> = React.forwardRef(
-	({ description, info, links, tags, title }, ref) => {
+const ProjectInfo = React.forwardRef<HTMLLIElement, ProjectInfoProps>(
+	({ description, info, links, style, tags, title }, ref) => {
 		return (
-			<div className={styles.projectInfo} ref={ref}>
+			<li
+				className={styles.projectInfo}
+				style={{
+					flexBasis: `min(min(2 * var(--column-width), 75vw), 50vh)`,
+					...style,
+				}}
+				ref={ref}
+			>
 				<h2>{title}</h2>
 				<section>
 					<p>{description}</p>
@@ -60,7 +68,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = React.forwardRef(
 						))}
 					</div>
 				</section>
-			</div>
+			</li>
 		)
 	}
 )

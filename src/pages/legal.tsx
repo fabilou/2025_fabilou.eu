@@ -1,11 +1,20 @@
 import * as React from "react"
-import { HeadFC, PageProps } from "gatsby"
+import { HeadFC, graphql, PageProps } from "gatsby"
 
+import { useGlobalContext } from "../components/GlobalContext"
 import Popup from "../components/Popup"
 import EmailButton from "../components/EmailButton"
 import Seo from "../components/seo"
 
-const LegalPage: React.FC<PageProps> = () => {
+const LegalPage: React.FC<PageProps> = ({ data }: any) => {
+	const { setProject, projectURL, setProjectURL } = useGlobalContext()
+
+	React.useEffect(() => {
+		if (!projectURL) {
+			setProjectURL(null)
+			setProject(data.projects)
+		}
+	}, [])
 	return (
 		<Popup>
 			<h2>Legal Notice</h2>
@@ -113,3 +122,27 @@ export const Head: HeadFC = () => (
 		<meta name="robots" content="noindex"></meta>
 	</Seo>
 )
+
+export const query = graphql`
+	query {
+		projects(slug: { eq: "index" }) {
+			media {
+				link {
+					path
+					title
+				}
+				path {
+					childImageSharp {
+						gatsbyImageData
+					}
+					internal {
+						mediaType
+					}
+					publicURL
+				}
+				width
+			}
+			slug
+		}
+	}
+`

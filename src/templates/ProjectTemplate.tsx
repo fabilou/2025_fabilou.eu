@@ -9,8 +9,16 @@ const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
 	const { setProjectURL, setProject } = useGlobalContext()
 
 	React.useEffect(() => {
-		setProjectURL(location.pathname)
-		setProject(data.projects)
+		if (!document.startViewTransition) {
+			setProjectURL(location.pathname)
+			setProject(data.projects)
+			return
+		} else {
+			document.startViewTransition(() => {
+				setProjectURL(location.pathname)
+				setProject(data.projects)
+			})
+		}
 	}, [])
 
 	return <></>

@@ -65,16 +65,17 @@ interface ThumbnailProps {
 	caption?: string
 	hidden?: boolean
 	image: any
-	ref?: React.ForwardedRef<HTMLDivElement>
+	ref?: React.ForwardedRef<HTMLLIElement>
 	slug?: string
+	style?: React.CSSProperties
 	type: string
 	width?: number
 }
 
-const Thumbnail: React.FC<ThumbnailProps> = React.forwardRef(
-	({ caption, image, hidden, slug, type, width }, ref) => {
+const Thumbnail = React.forwardRef<HTMLLIElement, ThumbnailProps>(
+	({ caption, image, hidden, slug, style, type, width }, ref) => {
 		return (
-			<figure
+			<li
 				className={styles.thumbnail}
 				hidden={hidden}
 				ref={ref}
@@ -82,32 +83,35 @@ const Thumbnail: React.FC<ThumbnailProps> = React.forwardRef(
 					flexBasis: `min(min(${
 						width ? width : 1
 					} * var(--column-width), 75vw), 50vh)`,
+					...style,
 				}}
 			>
-				{slug ? (
-					<>
-						<Image img={image} mediaType={type} />
-						{caption && (
-							<Link to={"/" + slug}>
+				<figure>
+					{slug ? (
+						<>
+							<Image img={image} mediaType={type} />
+							{caption && (
+								<Link to={"/" + slug}>
+									<figcaption className={styles.description}>
+										<span>{caption}</span>
+										<span>↗</span>
+									</figcaption>
+								</Link>
+							)}
+						</>
+					) : (
+						<>
+							<Image img={image} mediaType={type} />
+							{caption && (
 								<figcaption className={styles.description}>
 									<span>{caption}</span>
 									<span>↗</span>
 								</figcaption>
-							</Link>
-						)}
-					</>
-				) : (
-					<>
-						<Image img={image} mediaType={type} />
-						{caption && (
-							<figcaption className={styles.description}>
-								<span>{caption}</span>
-								<span>↗</span>
-							</figcaption>
-						)}
-					</>
-				)}
-			</figure>
+							)}
+						</>
+					)}
+				</figure>
+			</li>
 		)
 	}
 )
