@@ -13,8 +13,6 @@ const Popup: React.FC<PopupProps> = ({ children }) => {
 	const popup = React.useRef<HTMLDivElement>(null)
 	const popupContainer = React.useRef<HTMLDivElement>(null)
 
-	console.log(projectURL)
-
 	const closePopup = () => {
 		popup.current?.classList.add(styles.close)
 		popupContainer.current?.addEventListener("animationend", () =>

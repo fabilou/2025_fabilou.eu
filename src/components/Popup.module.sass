@@ -11,7 +11,7 @@
     inset: var(--spacing-xs) var(--spacing-xs) var(--spacing-xs) auto
     min-height: calc( 100% - 2 * var(--spacing-xs ))
     overflow-y: auto
-    padding-block: var(--spacing-l)
+    padding-block: calc( var(--spacing-m) - var(--spacing-xs) )
     position: fixed
     width: min(45ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
     z-index: 9999
@@ -34,12 +34,12 @@
     z-index: 99
 
 .button
-    font: var(--font-secondary-s)
+    font: var(--font-secondary-m)
     position: sticky
     justify-self: end
     text-shadow: var(--shadow-s)
     top: 0
-    margin-inline-end: var(--spacing-l)
+    margin-inline-end: calc( var(--spacing-m) - var(--spacing-xs) )
 
     &:hover, &:focus-visible
         text-shadow: var(--shadow-m)

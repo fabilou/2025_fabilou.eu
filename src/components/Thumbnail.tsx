@@ -5,6 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import * as styles from "./Thumbnail.module.sass"
 
 interface ImageProps {
+	columns?: number
 	img: any
 	mediaType: string
 }
@@ -34,7 +35,7 @@ const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
 		}
 	}, [])
 
-	if (mediaType === "video/mp4" || mediaType === "video/webm") {
+	if (["video/mp4", "video/webm"].some((type) => type === mediaType)) {
 		return (
 			<video
 				autoPlay
@@ -51,69 +52,71 @@ const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
 			</video>
 		)
 	} else if (
-		mediaType === "image/jpeg" ||
-		mediaType === "image/png" ||
-		mediaType === "image/webp" ||
-		mediaType === "image/gif" ||
-		mediaType === "image/svg"
+		["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg"].some(
+			(type) => type === mediaType
+		)
 	) {
 		return <GatsbyImage image={img} alt="" />
 	} else return <></>
 }
 
 interface ThumbnailProps {
+	aspectRatio?: number
 	caption?: string
-	hidden?: boolean
+	columns?: number
 	image: any
 	ref?: React.ForwardedRef<HTMLLIElement>
 	slug?: string
 	style?: React.CSSProperties
 	type: string
-	width?: number
 }
 
-const Thumbnail = React.forwardRef<HTMLLIElement, ThumbnailProps>(
-	({ caption, image, hidden, slug, style, type, width }, ref) => {
-		return (
-			<li
-				className={styles.thumbnail}
-				hidden={hidden}
-				ref={ref}
-				style={{
-					flexBasis: `min(min(${
-						width ? width : 1
-					} * var(--column-width), 75vw), 50vh)`,
-					...style,
-				}}
-			>
-				<figure>
-					{slug ? (
-						<>
-							<Image img={image} mediaType={type} />
-							{caption && (
-								<Link to={"/" + slug}>
-									<figcaption className={styles.description}>
-										<span>{caption}</span>
-										<span>↗</span>
-									</figcaption>
-								</Link>
-							)}
-						</>
-					) : (
-						<>
-							<Image img={image} mediaType={type} />
-							{caption && (
+const Thumbnail: React.FC<ThumbnailProps> = ({
+	aspectRatio,
+	caption,
+	columns,
+	image,
+	slug,
+	style,
+	type,
+}) => {
+	return (
+		<li
+			className={styles.thumbnail}
+			style={{
+				flexBasis: `min(var(--column-width) * ${columns} * ${aspectRatio}, ${
+					aspectRatio && aspectRatio <= 1 ? 50 : 80
+				}vh)`,
+				...style,
+			}}
+		>
+			<figure>
+				{slug ? (
+					<>
+						<Image columns={columns} img={image} mediaType={type} />
+						{caption && (
+							<Link to={"/" + slug}>
 								<figcaption className={styles.description}>
 									<span>{caption}</span>
 									<span>↗</span>
 								</figcaption>
-							)}
-						</>
-					)}
-				</figure>
-			</li>
-		)
-	}
-)
+							</Link>
+						)}
+					</>
+				) : (
+					<>
+						<Image columns={columns} img={image} mediaType={type} />
+						{caption && (
+							<figcaption className={styles.description}>
+								<span>{caption}</span>
+								<span>↗</span>
+							</figcaption>
+						)}
+					</>
+				)}
+			</figure>
+		</li>
+	)
+}
 
 export default Thumbnail

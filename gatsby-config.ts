@@ -2,7 +2,7 @@ import type { GatsbyConfig } from "gatsby"
 
 const config: GatsbyConfig = {
 	siteMetadata: {
-		siteUrl: "https://www.fabilou.eu",
+		siteUrl: "https://www.fabilou.com",
 		author: "Fabi Lou Viktoria Sax",
 		title: "Fabi Lou Viktoria",
 		titleTemplate: " // Fabi Lou Viktoria",
@@ -19,8 +19,10 @@ const config: GatsbyConfig = {
 		"gatsby-plugin-layout",
 		"gatsby-plugin-sass",
 		"gatsby-plugin-sharp",
+		"gatsby-plugin-ffmpeg",
 		"gatsby-plugin-sitemap",
 		"gatsby-transformer-sharp",
+		"gatsby-transformer-ffmpeg",
 		{
 			resolve: "gatsby-transformer-yaml",
 			options: {
@@ -28,16 +30,16 @@ const config: GatsbyConfig = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-manifest`,
+			resolve: "gatsby-plugin-manifest",
 			options: {
-				name: `Fabi Lou Viktoria Sax`,
-				short_name: `Fabi Lou Viktoria`,
-				start_url: `/`,
-				background_color: `#eee`,
-				theme_color: `#fff`,
-				display: `minimal-ui`,
-				icon: `src/data/favicon.png`,
-				lang: `en`,
+				name: "Fabi Lou Viktoria Sax",
+				short_name: "Fabi Lou Viktoria",
+				start_url: "/",
+				background_color: "#eee",
+				theme_color: "#fff",
+				display: "minimal-ui",
+				icon: "src/data/favicon.png",
+				lang: "en",
 			},
 		},
 		{

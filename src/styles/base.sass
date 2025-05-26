@@ -13,19 +13,14 @@
     --color-off-white-80: #{global.$color-off-white-80}
     --color-white: #{global.$color-white}
 
-    --font-size-xxs: #{global.$font-size-xxs}
-    --font-size-xs: #{global.$font-size-xs}
-    --font-size-s: #{global.$font-size-s}
+    --font-size-s: #{global.$font-size-xs}
     --font-size-m: #{global.$font-size-m}
 
-    --font-primary-xxs: 400 var(--font-size-xxs)/110% #{global.$typeface-primary}
-    --font-primary-xs: 400 var(--font-size-xs)/110% #{global.$typeface-primary}
     --font-primary-s: 400 var(--font-size-s)/110% #{global.$typeface-primary}
     --font-primary-m: 400 var(--font-size-m)/110% #{global.$typeface-primary}
 
-    --font-secondary-xxs: 300 var(--font-size-xxs)/110% #{global.$typeface-secondary}
-    --font-secondary-xs: 300 var(--font-size-xs)/110% #{global.$typeface-secondary}
     --font-secondary-s: 300 var(--font-size-s)/110% #{global.$typeface-secondary}
+    --font-secondary-m: 300 var(--font-size-m)/110% #{global.$typeface-secondary}
 
     --spacing-fixed-xxs: #{global.$spacing-fixed-xxs}
     --spacing-fixed-xs: #{global.$spacing-fixed-xs}
@@ -52,9 +47,7 @@
     --transition-s: #{global.$transition-s}
 
     @media screen and ( max-width: global.$breakpoint-s )
-        --font-size-xxs: #{global.$font-size-xxs}
-        --font-size-xs: #{global.$font-size-xxs}
-        --font-size-s: #{global.$font-size-xs}
+        --font-size-s: #{global.$font-size-xxs}
         --font-size-m: #{global.$font-size-s}
 
         --spacing-fixed-xs: #{global.$spacing-fixed-xxs}
@@ -73,7 +66,7 @@ html
     scroll-behavior: auto
 
 body
-    font: var(--font-primary-s)
+    font: var(--font-primary-m)
     color: var(--color-black)
     background-color: var(--color-white)
 
@@ -81,7 +74,7 @@ section
     margin-block-end: 2em
 
 h2:not([class]), h3:not([class]), h4:not([class])
-    font: var(--font-primary-xs)
+    font: var(--font-primary-s)
     margin-block-end: 0.5em
 
 p
@@ -92,7 +85,7 @@ p
 
     & > a
         font-size: inherit
-        font: var(--font-secondary-s)
+        font: var(--font-secondary-m)
         text-decoration: inherit
         text-shadow: var(--shadow-s)
 

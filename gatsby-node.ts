@@ -1,4 +1,4 @@
-import { GatsbyNode, graphql } from "gatsby"
+import { GatsbyNode } from "gatsby"
 import path from "path"
 
 type Data = {

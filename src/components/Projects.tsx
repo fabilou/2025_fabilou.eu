@@ -10,8 +10,6 @@ const Projects: React.FC = () => {
 	const { project } = useGlobalContext()
 
 	const containerRef = React.useRef<HTMLUListElement>(null)
-	const thumbnailRef = React.useRef<HTMLDivElement>(null)
-	const infoRef = React.useRef<HTMLDivElement>(null)
 
 	const [grabbing, setGrabbing] = React.useState(false)
 	const [scrollStart, setScrollStart] = React.useState(0)
@@ -63,20 +61,51 @@ const Projects: React.FC = () => {
 					/>
 				)}
 				{project?.media &&
-					project.media.map((item: any, i: number) => (
-						<Thumbnail
-							caption={item.link && item.link.title}
-							image={
-								item.path.childImageSharp
-									? item.path.childImageSharp.gatsbyImageData
-									: item.path.publicURL
-							}
-							key={i}
-							slug={item.link && item.link.path}
-							type={item.path.internal.mediaType}
-							width={item.width}
-						/>
-					))}
+					project.media.map((item: any, i: number) => {
+						if (
+							[
+								"image/jpeg",
+								"image/png",
+								"image/webp",
+								"image/gif",
+								"image/svg",
+							].some((type) => type === item.path.internal.mediaType)
+						) {
+							return (
+								<React.Fragment key={i}>
+									<Thumbnail
+										aspectRatio={item.path.childImageSharp.resize.aspectRatio}
+										caption={item.link && item.link.title}
+										columns={item.columns}
+										image={item.path.childImageSharp.gatsbyImageData}
+										slug={item.link && item.link.path}
+										type={item.path.internal.mediaType}
+									/>
+								</React.Fragment>
+							)
+						} else if (
+							["video/mp4", "video/webm"].some(
+								(type) => type === item.path.internal.mediaType
+							)
+						) {
+							return (
+								<React.Fragment key={i}>
+									<Thumbnail
+										aspectRatio={
+											item.path.childVideoFfmpeg.transcode.aspectRatio
+										}
+										caption={item.link && item.link.title}
+										columns={item.columns}
+										image={item.path.childVideoFfmpeg.transcode.src}
+										slug={item.link && item.link.path}
+										type={item.path.internal.mediaType}
+									/>
+								</React.Fragment>
+							)
+						} else {
+							return <></>
+						}
+					})}
 			</ul>
 		</div>
 	)

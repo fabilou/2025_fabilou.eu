@@ -69,7 +69,7 @@ const AboutPage: React.FC<PageProps> = ({ data }: any) => {
 					<h3>Let's collaborate!</h3>
 					<p>
 						I'd love to hear about your ideas at{" "}
-						<EmailButton text="hello@fabilou.eu" />
+						<EmailButton text="hello@fabilou.com" />
 					</p>
 				</section>
 			</Popup>
@@ -83,8 +83,9 @@ export const Head: HeadFC = () => <Seo title="About" />
 
 export const query = graphql`
 	query {
-		projects(slug: { eq: "index" }) {
+		projects(slug: { eq: "3d" }) {
 			media {
+				columns
 				link {
 					path
 					title
@@ -92,13 +93,21 @@ export const query = graphql`
 				path {
 					childImageSharp {
 						gatsbyImageData
+						resize {
+							aspectRatio
+						}
+					}
+					childVideoFfmpeg {
+						transcode {
+							aspectRatio
+							src
+						}
 					}
 					internal {
 						mediaType
 					}
 					publicURL
 				}
-				width
 			}
 			slug
 		}

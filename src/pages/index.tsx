@@ -5,17 +5,19 @@ import { useGlobalContext } from "../components/GlobalContext"
 import Seo from "../components/seo"
 
 const IndexPage: React.FC<PageProps> = ({ data }: any) => {
-	const { setProject, setProjectURL } = useGlobalContext()
+	const { setIndex, setProject, setProjectURL } = useGlobalContext()
 
 	React.useEffect(() => {
 		if (!document.startViewTransition) {
 			setProjectURL(null)
 			setProject(data.projects)
+			setIndex(null)
 			return
 		} else {
 			document.startViewTransition(() => {
 				setProjectURL(null)
 				setProject(data.projects)
+				setIndex(null)
 			})
 		}
 	}, [])
@@ -28,8 +30,9 @@ export const Head: HeadFC = () => <Seo />
 
 export const query = graphql`
 	query {
-		projects(slug: { eq: "index" }) {
+		projects(slug: { eq: "3d" }) {
 			media {
+				columns
 				link {
 					path
 					title
@@ -37,13 +40,21 @@ export const query = graphql`
 				path {
 					childImageSharp {
 						gatsbyImageData
+						resize {
+							aspectRatio
+						}
+					}
+					childVideoFfmpeg {
+						transcode {
+							aspectRatio
+							src
+						}
 					}
 					internal {
 						mediaType
 					}
 					publicURL
 				}
-				width
 			}
 			slug
 		}

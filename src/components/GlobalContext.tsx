@@ -1,7 +1,8 @@
 import * as React from "react"
-import { GatsbyImageProps } from "gatsby-plugin-image"
 
 interface GlobalContextType {
+	index: string | undefined | null
+	setIndex: (index: string | undefined | null) => void
 	project: any | undefined
 	setProject: (project: any) => void
 	projectURL: string | undefined | null
@@ -19,15 +20,19 @@ interface GlobalContextProviderProps {
 const GlobalContextProvider: React.FC<GlobalContextProviderProps> = ({
 	children,
 }) => {
+	const [index, setIndex] = React.useState<any>()
+
+	const [project, setProject] = React.useState<any>()
+
 	const [projectURL, setProjectURL] = React.useState<string | undefined | null>(
 		undefined
 	)
 
-	const [project, setProject] = React.useState<any>()
-
 	return (
 		<GlobalContext.Provider
 			value={{
+				index: index,
+				setIndex: setIndex,
 				project: project,
 				setProject: setProject,
 				projectURL: projectURL,

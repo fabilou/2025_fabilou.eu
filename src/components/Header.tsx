@@ -7,7 +7,7 @@ import EmailButton from "./EmailButton"
 import * as styles from "./Header.module.sass"
 
 const Header: React.FC = () => {
-	const { projectURL } = useGlobalContext()
+	const { index, project, projectURL } = useGlobalContext()
 
 	return (
 		<header className={styles.header}>
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
 						</h1>
 					</li>
 					<li>
-						<EmailButton className={styles.email} text="hello@fabilou.eu" />
+						<EmailButton className={styles.email} text="hello@fabilou.com" />
 					</li>
 					<li>
 						<a
@@ -39,9 +39,9 @@ const Header: React.FC = () => {
 							Github
 						</a>
 					</li>
-					{projectURL && (
+					{projectURL && !project?.isIndex && (
 						<li className={styles.back}>
-							<Link to="/">Back</Link>
+							<Link to={index ? index : "/"}>Back</Link>
 						</li>
 					)}
 					<li className={styles.right}>

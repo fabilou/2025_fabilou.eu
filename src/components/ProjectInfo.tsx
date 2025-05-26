@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 
 import * as styles from "./ProjectInfo.module.sass"
 
@@ -6,7 +7,7 @@ interface ProjectInfoProps {
 	description: string
 	info?: [{ label: string; value: [string] }]
 	links?: [{ label: string; target: string }]
-	tags?: [string]
+	tags?: [{ title: string; path?: string }]
 	ref?: React.ForwardedRef<HTMLLIElement>
 	style?: React.CSSProperties
 	title: string
@@ -61,11 +62,17 @@ const ProjectInfo = React.forwardRef<HTMLLIElement, ProjectInfoProps>(
 				)}
 				<section>
 					<div className={styles.tags}>
-						{tags?.map((tag: string, i: number) => (
-							<div className={styles.tag} key={i}>
-								{tag}
-							</div>
-						))}
+						{tags?.map((tag: { title: string; path?: string }, i: number) =>
+							tag.path ? (
+								<Link to={`/${tag.path}`} className={styles.tag} key={i}>
+									{tag.title}
+								</Link>
+							) : (
+								<div className={styles.tag} key={i}>
+									{tag.title}
+								</div>
+							)
+						)}
 					</div>
 				</section>
 			</li>

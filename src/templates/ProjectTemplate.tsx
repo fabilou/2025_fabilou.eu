@@ -2,21 +2,28 @@ import * as React from "react"
 import { HeadFC, graphql, PageProps } from "gatsby"
 
 import { useGlobalContext } from "../components/GlobalContext"
-import Projects from "../components/Projects"
 import Seo from "../components/seo"
 
 const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
-	const { setProjectURL, setProject } = useGlobalContext()
+	const { setIndex, setProjectURL, setProject } = useGlobalContext()
 
 	React.useEffect(() => {
 		if (!document.startViewTransition) {
 			setProjectURL(location.pathname)
 			setProject(data.projects)
+
+			if (data.projects?.isIndex) {
+				setIndex(location.pathname)
+			}
 			return
 		} else {
 			document.startViewTransition(() => {
 				setProjectURL(location.pathname)
 				setProject(data.projects)
+
+				if (data.projects?.isIndex) {
+					setIndex(location.pathname)
+				}
 			})
 		}
 	}, [])
@@ -34,7 +41,9 @@ export const Head: HeadFC = ({ data }: any) =>
 export const query = graphql`
 	query ($slug: String!) {
 		projects(slug: { eq: $slug }) {
+			isIndex
 			media {
+				columns
 				link {
 					path
 					title
@@ -42,13 +51,21 @@ export const query = graphql`
 				path {
 					childImageSharp {
 						gatsbyImageData
+						resize {
+							aspectRatio
+						}
+					}
+					childVideoFfmpeg {
+						transcode {
+							aspectRatio
+							src
+						}
 					}
 					internal {
 						mediaType
 					}
 					publicURL
 				}
-				width
 			}
 			projectInfo {
 				description
@@ -60,7 +77,10 @@ export const query = graphql`
 					label
 					target
 				}
-				tags
+				tags {
+					path
+					title
+				}
 				title
 			}
 			slug
