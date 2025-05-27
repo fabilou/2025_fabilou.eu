@@ -19,7 +19,8 @@ const ProjectInfo = React.forwardRef<HTMLLIElement, ProjectInfoProps>(
 			<li
 				className={styles.projectInfo}
 				style={{
-					flexBasis: `min(min(2 * var(--column-width), 75vw), 50vh)`,
+					flexBasis: `min(var(--column-width) * 2 * 0.8, 45vh)`,
+					aspectRatio: 0.8,
 					...style,
 				}}
 				ref={ref}

@@ -1,5 +1,6 @@
 import { GatsbyNode } from "gatsby"
 import path from "path"
+import {} from "gatsby"
 
 type Data = {
 	data?: any

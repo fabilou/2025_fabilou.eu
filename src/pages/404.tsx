@@ -42,7 +42,7 @@ export const query = graphql`
 						}
 					}
 					childVideoFfmpeg {
-						transcode {
+						transcode(fileExtension: "mp4") {
 							aspectRatio
 							src
 						}

@@ -69,7 +69,8 @@ const Projects: React.FC = () => {
 								"image/webp",
 								"image/gif",
 								"image/svg",
-							].some((type) => type === item.path.internal.mediaType)
+							].some((type) => type === item.path.internal.mediaType) &&
+							item.path.childImageSharp
 						) {
 							return (
 								<React.Fragment key={i}>
@@ -86,7 +87,8 @@ const Projects: React.FC = () => {
 						} else if (
 							["video/mp4", "video/webm"].some(
 								(type) => type === item.path.internal.mediaType
-							)
+							) &&
+							item.path.childVideoFfmpeg.transcode
 						) {
 							return (
 								<React.Fragment key={i}>

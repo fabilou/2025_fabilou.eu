@@ -16,6 +16,9 @@
     width: min(45ch + 2 * var(--spacing-l), 100% - 2 * var(--spacing-xs))
     z-index: 9999
 
+    @media screen and ( max-width: global.$breakpoint-s )
+        padding-block: var(--spacing-l)
+
     & .content
         padding-inline: var(--spacing-l)
 
@@ -40,6 +43,9 @@
     text-shadow: var(--shadow-s)
     top: 0
     margin-inline-end: calc( var(--spacing-m) - var(--spacing-xs) )
+
+    @media screen and ( max-width: global.$breakpoint-s )
+        margin-inline-end: var(--spacing-l)
 
     &:hover, &:focus-visible
         text-shadow: var(--shadow-m)

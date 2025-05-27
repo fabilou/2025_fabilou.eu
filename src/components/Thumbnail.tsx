@@ -56,7 +56,7 @@ const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
 			(type) => type === mediaType
 		)
 	) {
-		return <GatsbyImage image={img} alt="" />
+		return <GatsbyImage className={styles.image} image={img} alt="" />
 	} else return <></>
 }
 
@@ -85,12 +85,13 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 			className={styles.thumbnail}
 			style={{
 				flexBasis: `min(var(--column-width) * ${columns} * ${aspectRatio}, ${
-					aspectRatio && aspectRatio <= 1 ? 50 : 80
+					aspectRatio && aspectRatio <= 1 ? 45 : 80
 				}vh)`,
+				// flexBasis: `calc(66vh * ${aspectRatio})`,
 				...style,
 			}}
 		>
-			<figure>
+			<figure style={{ aspectRatio: aspectRatio }}>
 				{slug ? (
 					<>
 						<Image columns={columns} img={image} mediaType={type} />
