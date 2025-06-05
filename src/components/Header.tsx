@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 	return (
 		<header className={styles.header}>
 			<nav>
-				<ul className={styles.navList}>
+				<ul className={styles.mainNavList}>
 					<li>
 						<h1>
 							<Link to="/">Fabi Lou Viktoria Sax</Link>
@@ -48,6 +48,26 @@ const Header: React.FC = () => {
 						<Link to="/about">About</Link>
 					</li>
 				</ul>
+				{/* <ul className={styles.secondaryNavList}>
+					<li>
+						<Link
+							to="/"
+							className={styles.link}
+							activeClassName={styles.active}
+						>
+							3D Design
+						</Link>
+					</li>
+					<li>
+						<Link
+							to="/web"
+							className={styles.link}
+							activeClassName={styles.active}
+						>
+							Webdesign & Code
+						</Link>
+					</li>
+				</ul> */}
 			</nav>
 		</header>
 	)

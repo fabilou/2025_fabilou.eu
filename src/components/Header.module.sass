@@ -4,7 +4,7 @@
     inset: var(--spacing-m) var(--spacing-m) auto
     position: absolute
 
-.nav-list
+.main-nav-list
     list-style: none
     display: grid
     grid-auto-rows: 1fr
@@ -35,3 +35,22 @@
     align-self: end
     grid-row: span 2
     z-index: 99
+
+.secondary-nav-list
+    backdrop-filter: blur(32px)
+    background-color: var(--color-off-white-50)
+    border-radius: var(--radius-s)
+    display: flex
+    inset: var(--spacing-xxl) 50% auto auto
+    position: absolute
+    translate: 50% 0
+
+    & > li
+        font: var(--font-primary-s)
+        padding: var(--spacing-fixed-xs)
+        border-radius: var(--radius-s)
+        padding-inline: var(--spacing-fixed-s)
+        white-space: nowrap
+
+        &:has(.active)
+            background-color: var(--color-off-white)

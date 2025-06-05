@@ -10,13 +10,11 @@
     &:hover .description
         opacity: 1
 
-.description
+.description, .mute-button
     backdrop-filter: blur(32px)
     background-color: var(--color-off-white-50)
     border-radius: var(--radius-s)
     font: var(--font-primary-s)
-    inset: auto auto var(--spacing-fixed-s) var(--spacing-fixed-s)
-    opacity: 0
     padding: 0.5em 1em
     position: absolute
     transition: opacity var(--transition-s)
@@ -24,6 +22,13 @@
     align-items: baseline
     gap: var(--spacing-fixed-xxs)
     color: var(--color-black)
+
+.description
+    opacity: 0
+    inset: auto auto var(--spacing-fixed-s) var(--spacing-fixed-s)
+
+.mute-button
+    inset: auto var(--spacing-fixed-s) var(--spacing-fixed-s) auto
 
 .image
     position: static
