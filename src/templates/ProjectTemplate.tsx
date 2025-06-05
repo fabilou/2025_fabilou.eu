@@ -8,23 +8,11 @@ const ProjectTemplatePage: React.FC<PageProps> = ({ data, location }: any) => {
 	const { setIndex, setProjectURL, setProject } = useGlobalContext()
 
 	React.useEffect(() => {
-		if (!document.startViewTransition) {
-			setProjectURL(location.pathname)
-			setProject(data.projects)
+		setProjectURL(location.pathname)
+		setProject(data.projects)
 
-			if (data.projects?.isIndex) {
-				setIndex(location.pathname)
-			}
-			return
-		} else {
-			document.startViewTransition(() => {
-				setProjectURL(location.pathname)
-				setProject(data.projects)
-
-				if (data.projects?.isIndex) {
-					setIndex(location.pathname)
-				}
-			})
+		if (data.projects?.isIndex) {
+			setIndex(location.pathname)
 		}
 	}, [])
 
