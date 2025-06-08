@@ -84,6 +84,7 @@ export const Head: HeadFC = () => <Seo title="About" />
 export const query = graphql`
 	query {
 		projects(slug: { eq: "3d" }) {
+			isIndex
 			media {
 				columns
 				link {
@@ -98,9 +99,27 @@ export const query = graphql`
 						}
 					}
 					childVideoFfmpeg {
-						transcode(fileExtension: "mp4") {
-							aspectRatio
+						desktopMP4: transcode(
+							codec: "libx264"
+							maxWidth: 1920
+							maxHeight: 1080
+							fileExtension: "mp4"
+							options: [["-profile:v", "main"], ["-pix_fmt", "yuv420p"]]
+							outputOptions: ["-movflags faststart"]
+						) {
 							src
+							aspectRatio
+						}
+						mobileMP4: transcode(
+							codec: "libx264"
+							maxWidth: 1280
+							maxHeight: 720
+							fileExtension: "mp4"
+							options: [["-profile:v", "main"], ["-pix_fmt", "yuv420p"]]
+							outputOptions: ["-movflags faststart"]
+						) {
+							src
+							aspectRatio
 						}
 					}
 					internal {

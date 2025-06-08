@@ -30,23 +30,25 @@ const ProjectInfo = React.forwardRef<HTMLLIElement, ProjectInfoProps>(
 					<p>{description}</p>
 				</section>
 				<section>
-					<h3>Info</h3>
 					{info && (
-						<div className={styles.info}>
-							{info.map((item: any, i: number) => (
-								<div key={i}>
-									<h4 className={styles.label}>{item.label}</h4>
-									<p className={styles.value}>
-										{item.value.map((value: string, j: number) => (
-											<React.Fragment key={j}>
-												<span>{value}</span>
-												{j < item.value.length - 1 ? ", " : ""}
-											</React.Fragment>
-										))}
-									</p>
-								</div>
-							))}
-						</div>
+						<>
+							<h3>Info</h3>
+							<div className={styles.info}>
+								{info.map((item: any, i: number) => (
+									<div key={i}>
+										<h4 className={styles.label}>{item.label}</h4>
+										<p className={styles.value}>
+											{item.value.map((value: string, j: number) => (
+												<React.Fragment key={j}>
+													<span>{value}</span>
+													{j < item.value.length - 1 ? ", " : ""}
+												</React.Fragment>
+											))}
+										</p>
+									</div>
+								))}
+							</div>
+						</>
 					)}
 				</section>
 				{links && (

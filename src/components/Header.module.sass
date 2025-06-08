@@ -41,16 +41,17 @@
     background-color: var(--color-off-white-50)
     border-radius: var(--radius-s)
     display: flex
-    inset: var(--spacing-xxl) 50% auto auto
+    inset: calc(6 * 1em - var(--spacing-fixed-xs )) 50% auto auto
     position: absolute
     translate: 50% 0
 
-    & > li
+    &  .link
         font: var(--font-primary-s)
-        padding: var(--spacing-fixed-xs)
-        border-radius: var(--radius-s)
-        padding-inline: var(--spacing-fixed-s)
+            // background: lavender
+        display: block
         white-space: nowrap
+        border-radius: var(--radius-s)
+        padding: var(--spacing-fixed-xs) var(--spacing-fixed-s)
 
-        &:has(.active)
+        &.active
             background-color: var(--color-off-white)

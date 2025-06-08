@@ -52,8 +52,11 @@ const Header: React.FC = () => {
 					<li>
 						<Link
 							to="/"
-							className={styles.link}
-							activeClassName={styles.active}
+							className={
+								index === "/3d/" || index === "/"
+									? [styles.link, styles.active].join(" ")
+									: styles.link
+							}
 						>
 							3D Design
 						</Link>
@@ -61,8 +64,11 @@ const Header: React.FC = () => {
 					<li>
 						<Link
 							to="/web"
-							className={styles.link}
-							activeClassName={styles.active}
+							className={
+								index === "/web/"
+									? [styles.link, styles.active].join(" ")
+									: styles.link
+							}
 						>
 							Webdesign & Code
 						</Link>

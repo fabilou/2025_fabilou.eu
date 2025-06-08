@@ -2,6 +2,8 @@ import React, { ForwardedRef, forwardRef } from "react"
 import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
+import useViewportSize from "../hooks/use-viewport-size"
+
 import * as styles from "./Thumbnail.module.sass"
 
 interface ImageProps {
@@ -12,6 +14,8 @@ interface ImageProps {
 
 const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
 	const video = React.useRef<HTMLVideoElement>(null)
+
+	const viewportSize = useViewportSize()
 
 	React.useEffect(() => {
 		const observer = new IntersectionObserver((entries) => {
@@ -48,7 +52,15 @@ const Image: React.FC<ImageProps> = ({ img, mediaType }) => {
 				preload="metadata"
 				ref={video}
 			>
-				<source src={img} type={mediaType} />
+				{viewportSize.width <= 768 ? (
+					<>
+						<source src={img} type="video/mp4" />
+					</>
+				) : (
+					<>
+						<source src={img} type="video/mp4" />
+					</>
+				)}
 			</video>
 		)
 	} else if (
@@ -87,7 +99,6 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 				flexBasis: `min(var(--column-width) * ${columns} * ${aspectRatio}, ${
 					aspectRatio && aspectRatio <= 1 ? 45 : 80
 				}vh)`,
-				// flexBasis: `calc(66vh * ${aspectRatio})`,
 				...style,
 			}}
 		>

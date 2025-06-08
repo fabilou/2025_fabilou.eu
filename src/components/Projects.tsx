@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { useGlobalContext } from "./GlobalContext"
+import useViewportSize from "../hooks/use-viewport-size"
 import Thumbnail from "./Thumbnail"
 import ProjectInfo from "./ProjectInfo"
 
@@ -8,6 +9,8 @@ import * as styles from "./Projects.module.sass"
 
 const Projects: React.FC = () => {
 	const { project } = useGlobalContext()
+
+	const viewportSize = useViewportSize()
 
 	const containerRef = React.useRef<HTMLUListElement>(null)
 
@@ -88,17 +91,23 @@ const Projects: React.FC = () => {
 							["video/mp4", "video/webm"].some(
 								(type) => type === item.path.internal.mediaType
 							) &&
-							item.path.childVideoFfmpeg.transcode
+							item.path.childVideoFfmpeg
 						) {
 							return (
 								<React.Fragment key={i}>
 									<Thumbnail
 										aspectRatio={
-											item.path.childVideoFfmpeg.transcode.aspectRatio
+											viewportSize.width <= 768
+												? item.path.childVideoFfmpeg.mobileMP4.aspectRatio
+												: item.path.childVideoFfmpeg.desktopMP4.aspectRatio
 										}
 										caption={item.link && item.link.title}
 										columns={item.columns}
-										image={item.path.childVideoFfmpeg.transcode.src}
+										image={
+											viewportSize.width <= 768
+												? item.path.childVideoFfmpeg.mobileMP4.src
+												: item.path.childVideoFfmpeg.desktopMP4.src
+										}
 										slug={item.link && item.link.path}
 										type={item.path.internal.mediaType}
 									/>
